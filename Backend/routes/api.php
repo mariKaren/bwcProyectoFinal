@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\ReviewController;
+use App\Http\Controllers\API\WishlistController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -45,4 +46,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::put('/reviews/{id}', [ReviewController::class, 'update']);
     Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
+
+    //WishList. La ruta es generica pero en el controlador se filtra por user_id
+    Route::get('/wishlist', [WishlistController::class, 'index']);
+    Route::post('/wishlist', [WishlistController::class, 'store']);
+    Route::delete('/wishlist/{book_id}', [WishlistController::class, 'destroy']);
 });
