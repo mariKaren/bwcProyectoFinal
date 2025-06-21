@@ -6,13 +6,13 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Termwind\Components\Raw;
+
 
 class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews = Review::select('_id','book_id', 'rating', 'description')->get(); //Al ser publico, no quiero que me devuelva un user id 
+        $reviews = Review::select('id','book_id', 'rating', 'description')->get(); //Al ser publico, no quiero que me devuelva un user id 
         return response()->json([
             'status' => 'success',
             'data' => $reviews,
@@ -64,7 +64,7 @@ class ReviewController extends Controller
 
     public function show($id)
     {
-        $review = Review::where('_id', $id)->select('_id', 'book_id', 'description', 'rating')->first();;
+        $review = Review::select('id', 'book_id', 'description', 'rating')->first($id);;
         if (!$review) {
             return response()->json([
                 'status' => 'error',
@@ -80,7 +80,7 @@ class ReviewController extends Controller
 
     public function update(Request $request, $id)
     {
-        $review = Review::where('_id', $id)->first();
+        $review = Review::find($id);
         if (!$review) {
             return response()->json([
                 'status' => 'error',
@@ -122,7 +122,7 @@ class ReviewController extends Controller
 
     public function destroy( Request $request, $id)
     {
-        $review = Review::where('_id', $id)->first();
+        $review = Review::find($id);
         if (!$review) {
             return response()->json([
                 'status' => 'error',

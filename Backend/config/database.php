@@ -62,17 +62,6 @@ return [
             ]) : [],
         ],
 
-        'mongodb' => [ 
-            'driver'  => 'mongodb',
-            'dsn' => env('DB_MONGO_URI'),
-            'database' => env('DB_MONGO_DATABASE', 'libreriaVirtual'),
-            'username' => env('DB_MONGO_USERNAME'),
-            'password' => env('DB_MONGO_PASSWORD'),
-            'options'=> [
-                'database' => 'admin'
-            ]
-            ],
-
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
