@@ -12,7 +12,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews = Review::select('id','book_id', 'rating', 'description')->get(); //Al ser publico, no quiero que me devuelva un user id 
+        $reviews = Review::select('id','book_id', 'rating', 'description')->get(); //Al ser publico para todos los usuarios autenticados, no quiero que me devuelva un user id 
         return response()->json([
             'status' => 'success',
             'data' => $reviews,
@@ -64,7 +64,7 @@ class ReviewController extends Controller
 
     public function show($id)
     {
-        $review = Review::select('id', 'book_id', 'description', 'rating')->first($id);;
+        $review = Review::select('id', 'book_id', 'description', 'rating')->find($id);;
         if (!$review) {
             return response()->json([
                 'status' => 'error',
