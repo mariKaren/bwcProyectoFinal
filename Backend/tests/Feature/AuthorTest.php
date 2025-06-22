@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Book;
 use App\Models\Author;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -65,8 +66,8 @@ class AuthorTest extends TestCase
         $this->assertDatabaseHas('authors', ['id' => $author->id, 'name' => 'Isabel A. Allende']);
     }
 
-    //verificar que admin pueda eliminar un autor
-    public function test_admin_can_delete_author()
+    //verificar que admin pueda eliminar un autor sin libros asociados 
+    public function test_admin_can_delete_author_without_books()
     {
         $admin = User::factory()->create(['role' => 'admin']);
         $author = Author::factory()->create();
@@ -77,7 +78,24 @@ class AuthorTest extends TestCase
         $this->assertDatabaseMissing('authors', ['id' => $author->id]);
     }
 
-    //verificar que user no pueda ni eiminar ni actualizar un autor
+    //verificar que un admin no pueda eliminar un autor con libros asociados
+    public function test_admin_cannot_delete_author_with_books()
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $author = Author::factory()->create();
+        Book::factory()->create(['author_id' => $author->id]);
+
+        $response = $this->actingAs($admin, 'sanctum')->deleteJson("/api/authors/{$author->id}");
+
+        $response->assertStatus(422)
+                ->assertJsonFragment([
+                    'error' => 'It is not possible to delete an author who has books associated with them.'
+                ]);
+
+        $this->assertDatabaseHas('authors', ['id' => $author->id]);
+    }
+
+    //verificar que user no pueda eliminar ni actualizar un autor
     public function test_non_admin_cannot_update_or_delete_author()
     {
         $user = User::factory()->create(['role' => 'user']);
