@@ -12,7 +12,7 @@ class ReviewTest extends TestCase
 {
     use RefreshDatabase;
 
-    //verificar que pueda crear una reseña
+    // Verifica que un usuario autenticado pueda crear una reseña para un libro
     public function test_user_can_create_review()
     {
         $user = User::factory()->create();
@@ -34,7 +34,7 @@ class ReviewTest extends TestCase
         ]);
     }
 
-    //verificar que no pueda reseñar un mismo libro dos veces
+    // Verifica que un usuario no pueda crear más de una reseña para el mismo libro
     public function test_user_cannot_review_same_book_twice()
     {
         $user = User::factory()->create();
@@ -57,7 +57,7 @@ class ReviewTest extends TestCase
                 ->assertJsonFragment(['message' => 'You have already reviewed this book']);
     }
 
-    //verificar que pueda actualizar su reseña
+    //Verifica que un usuario pueda actualizar su propia reseña
     public function test_user_can_update_own_review()
     {
         $user = User::factory()->create();
@@ -85,7 +85,7 @@ class ReviewTest extends TestCase
         ]);
     }
 
-    //verificar que pueda eliminar su reseña 
+    // Verifica que un usuario pueda eliminar su propia reseña
     public function test_user_can_delete_own_review()
     {
         $user = User::factory()->create();
@@ -104,7 +104,7 @@ class ReviewTest extends TestCase
         $this->assertDatabaseMissing('reviews', ['id' => $review->id]);
     }
 
-    //verificar que no pueda crear una reseña sin estar autenticado
+    //Verifica que un usuario no autenticado no pueda crear una reseña
     public function test_guest_cannot_create_review()
         {
             $book = Book::factory()->create();

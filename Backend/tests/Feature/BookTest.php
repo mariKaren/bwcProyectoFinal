@@ -12,7 +12,7 @@ class BookTest extends TestCase
 {
     use RefreshDatabase;
 
-    //verificar que el usuario pueda ver el listado de libros
+    //Verifica que cualquier usuario pueda obtener el listado de libros
     public function test_can_list_books()
     {
         Book::factory()->count(3)->create();
@@ -23,7 +23,7 @@ class BookTest extends TestCase
                 ->assertJsonStructure(['status', 'data']);
     }
 
-    //verificar el ingreso a ver el detalle del libro
+    //Verifica que se pueda acceder a los detalles de un libro específico
     public function test_can_show_a_book()
     {
         $book = Book::factory()->create();
@@ -34,7 +34,7 @@ class BookTest extends TestCase
                 ->assertJsonFragment(['id' => $book->id]);
     }
 
-    //verificar que admin pueda crear un libro
+    //Verifica que se pueda acceder a los detalles de un libro específico
     public function test_admin_can_create_book()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -56,7 +56,7 @@ class BookTest extends TestCase
         $this->assertDatabaseHas('books', ['title' => 'Nuevo libro']);
     }
 
-    //verificar que solo admin pueda crear un libro
+    //Verifica que un usuario sin rol admin no pueda crear un libro
     public function test_non_admin_cannot_create_book()
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -73,7 +73,7 @@ class BookTest extends TestCase
         $response->assertStatus(403); // Middleware bloquea por rol
     }
 
-    //verificar que admin pueda actualizar un libro
+    //Verifica que un usuario con rol admin pueda actualizar un libro existente
     public function test_admin_can_update_book()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -90,7 +90,7 @@ class BookTest extends TestCase
         $this->assertDatabaseHas('books', ['id' => $book->id, 'title' => 'Título actualizado']);
     }
 
-    //verificar que admin pueda eliminar un libro
+    // Verifica que un usuario con rol admin pueda eliminar un libro
     public function test_admin_can_delete_book()
     {
         $admin = User::factory()->create(['role' => 'admin']);

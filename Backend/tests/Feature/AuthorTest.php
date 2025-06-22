@@ -12,7 +12,7 @@ class AuthorTest extends TestCase
 {
     use RefreshDatabase;
 
-    //verificar que admin pueda crear un autor
+    // Verifica que un usuario con rol admin pueda crear un autor
     public function test_admin_can_create_author()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -33,7 +33,7 @@ class AuthorTest extends TestCase
         $this->assertDatabaseHas('authors', ['name' => 'Gabriel García Márquez']);
     }
 
-    //verificar que user no pueda crear un autor
+    // Verifica que un usuario sin rol admin no pueda crear un autor
     public function test_non_admin_cannot_create_author()
     {
         $user = User::factory()->create(['role' => 'user']);
@@ -48,7 +48,7 @@ class AuthorTest extends TestCase
         $response->assertStatus(403);
     }
 
-    //verificar que admin pueda actualizar un autor
+    // Verifica que un usuario con rol admin pueda actualizar la información de un autor
     public function test_admin_can_update_author()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -66,7 +66,7 @@ class AuthorTest extends TestCase
         $this->assertDatabaseHas('authors', ['id' => $author->id, 'name' => 'Isabel A. Allende']);
     }
 
-    //verificar que admin pueda eliminar un autor sin libros asociados 
+    // Verifica que un usuario con rol admin pueda eliminar un autor sin libros asociados
     public function test_admin_can_delete_author_without_books()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -78,7 +78,7 @@ class AuthorTest extends TestCase
         $this->assertDatabaseMissing('authors', ['id' => $author->id]);
     }
 
-    //verificar que un admin no pueda eliminar un autor con libros asociados
+    // Verifica que un usuario con rol admin no pueda eliminar un autor que tiene libros asociados
     public function test_admin_cannot_delete_author_with_books()
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -95,7 +95,7 @@ class AuthorTest extends TestCase
         $this->assertDatabaseHas('authors', ['id' => $author->id]);
     }
 
-    //verificar que user no pueda eliminar ni actualizar un autor
+    // Verifica que un usuario sin rol admin no pueda actualizar ni eliminar un autor
     public function test_non_admin_cannot_update_or_delete_author()
     {
         $user = User::factory()->create(['role' => 'user']);

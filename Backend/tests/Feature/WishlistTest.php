@@ -13,7 +13,7 @@ class WishlistTest extends TestCase
 {
     use RefreshDatabase;
     
-    //verificar que el usuario pueda agregar un libro a la lista de deseos
+    //Verifica que un usuario pueda agregar un libro a su lista de deseos
     public function test_user_can_add_book_to_wishlist()
     {
         $user = User::factory()->create();
@@ -30,13 +30,13 @@ class WishlistTest extends TestCase
         ]);
     }
 
-    //Verificar que no se pueda agregar el mismo libro dos veces
+    //Verifica que no se pueda agregar el mismo libro dos veces a la lista de deseos
     public function test_user_cannot_add_same_book_twice()
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
 
-        // Primer agregado
+        // Primer intento
         $this->actingAs($user)->postJson('/api/wishlist', [
             'book_id' => $book->id,
         ]);
@@ -53,7 +53,7 @@ class WishlistTest extends TestCase
         ]);
     }
 
-    //verificar que puedan ver las listas de deseos que hicieron
+    //Verifica que un usuario pueda ver su propia lista de deseos
     public function test_user_can_view_their_wishlist()
     {
         $user = User::factory()->create();
@@ -72,19 +72,17 @@ class WishlistTest extends TestCase
         ]);
     }
 
-    //verificar que puedan eliminar libros
+    //Verifica que un usuario pueda eliminar un libro de su lista de deseos
     public function test_user_can_remove_book_from_wishlist()
     {
         $user = User::factory()->create();
         $book = Book::factory()->create();
 
-        // Crear relación en la base
         Wishlist::create([
             'user_id' => $user->id,
             'book_id' => $book->id,
         ]);
 
-        // Ejecutar DELETE
         $response = $this->actingAs($user)->deleteJson("/api/wishlist/{$book->id}");
 
         $response->assertStatus(204);
@@ -95,7 +93,7 @@ class WishlistTest extends TestCase
         ]);
     }
     
-    //verificar que no puedan acceder sin estar autentificados
+    // Verifica que los usuarios no autenticados no puedan acceder a las rutas de la lista de deseos
     public function test_guest_cannot_access_wishlist_routes()
     {
         $book = Book::factory()->create();

@@ -11,7 +11,7 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    /* verificar que se pueda registrar correctamente*/
+    // Verifica que un usuario pueda registrarse correctamente con datos válidos
     public function test_user_can_register_successfully()
     {
         $payload = [
@@ -33,7 +33,7 @@ class AuthTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => 'nuevo@correo.com']);
     }
 
-    /* verificar que haya error con datos invalidos*/
+    // Verifica que el registro falle al proporcionar datos inválidos
     public function test_user_registration_fails_with_invalid_data()
     {
         $payload = [
@@ -48,7 +48,7 @@ class AuthTest extends TestCase
                 ->assertJsonValidationErrors(['name', 'email', 'password']);
     }
 
-    /*verificar login exitoso*/
+    // Verifica que un usuario pueda iniciar sesión con credenciales válidas
     public function test_user_can_login_with_valid_credentials()
     {
         $user = User::factory()->create([
@@ -72,7 +72,7 @@ class AuthTest extends TestCase
                 ]);
     }
 
-    /*verificar fallo de login por datos invalidos*/
+    // Verifica que el inicio de sesión falle al proporcionar credenciales incorrectas
     public function test_login_fails_with_invalid_credentials()
     {
         $user = User::factory()->create([
@@ -91,7 +91,7 @@ class AuthTest extends TestCase
                 ->assertJsonFragment(['message' => 'Invalid credentials']);
     }
 
-    /*verificar error por input invalido*/
+    // Verifica que el inicio de sesión falle al enviar datos inválidos
     public function test_login_fails_with_invalid_input()
     {
         $response = $this->postJson('/api/login', [
@@ -103,7 +103,7 @@ class AuthTest extends TestCase
                 ->assertJsonValidationErrors(['email', 'password']);
     }
 
-    /*verificar logout exitoso*/
+    // Verifica que un usuario autenticado pueda cerrar sesión correctamente
     public function test_authenticated_user_can_logout()
     {
         $user = User::factory()->create();
@@ -117,7 +117,7 @@ class AuthTest extends TestCase
                 ->assertJsonFragment(['message' => 'Logged out successfully']);
     }
 
-    /*verificar que un usuario no autenticado no pueda acceder a rutas protegidas*/
+    // Verifica que un usuario no autenticado no pueda acceder a rutas protegidas
     public function test_unauthenticated_user_cannot_access_protected_routes()
     {
         $response = $this->postJson('/api/logout');
@@ -126,7 +126,7 @@ class AuthTest extends TestCase
                 ->assertJsonFragment(['message' => 'Unauthenticated.']);
     }
 
-    /*verificar que user no pueda acceder a rutas admin*/
+    // Verifica que un usuario sin rol admin no pueda acceder a rutas restringidas para administradores
     public function test_user_with_no_admin_role_cannot_access_admin_routes()
     {
         $user = User::factory()->create(['role' => 'user']);
