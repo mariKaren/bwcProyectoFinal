@@ -13,7 +13,6 @@ class WishlistTest extends TestCase
 {
     use RefreshDatabase;
     
-
     //verificar que el usuario pueda agregar un libro a la lista de deseos
     public function test_user_can_add_book_to_wishlist()
     {
@@ -95,6 +94,7 @@ class WishlistTest extends TestCase
             'book_id' => $book->id,
         ]);
     }
+    
     //verificar que no puedan acceder sin estar autentificados
     public function test_guest_cannot_access_wishlist_routes()
     {
