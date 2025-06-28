@@ -1,70 +1,43 @@
 @import 'tailwindcss';
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --c-beige: #f0eae5;
+  --c-brown: #59380D;
+  --c-pink: #E1A8A8;
+  --c-orange: #FF8A58;
+  --c-yellow: #F2C379;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*{
+  box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+#root {
+  margin: 0 auto;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer utilities {
+  .bg-beige {
+    background-color: var(--c-beige);
   }
-  a:hover {
-    color: #747bff;
+
+  .text-brown {
+    color: var(--c-brown);
   }
-  button {
-    background-color: #f9f9f9;
+
+  .text-pink {
+    color: var(--c-pink);
+  }
+
+  .text-orange{
+    color:var(--c-orange)
+  }
+
+  .bg-orange {
+    background-color: var(--c-orange);
+  }
+
+  .hover\:bg-yellow:hover {
+    background-color: var(--c-yellow);
   }
 }
