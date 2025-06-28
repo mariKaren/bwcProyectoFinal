@@ -1,10 +1,7 @@
-import { Menu, MenuHandler, MenuList, MenuItem, Button } from "@material-tailwind/react";
-import { Link, NavLink,useLocation} from "react-router";
+import { Link, NavLink} from "react-router";
 
 
 export default function Header() {
-    const location = useLocation();
-    const isLibrosActive = location.pathname.startsWith("/libros");
     return (
         <header className="shadow-md bg-beige">
             <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-2">
@@ -22,7 +19,6 @@ export default function Header() {
                             </NavLink>
                         </li>
                         <li>
-                            
                         </li>
                         <li>
                             <NavLink
