@@ -62,7 +62,7 @@ export default function Header() {
                                 <ul className="hidden md:block absolute left-0 mt-2 bg-white shadow-md rounded p-2 w-max z-20">
                                     <li>
                                         <NavLink
-                                        to="/libros/avanzada"
+                                        to="/libros/busqueda"
                                         onClick={() => {
                                             setDropdownOpen(false);
                                             setMenuOpen(false);
@@ -92,7 +92,7 @@ export default function Header() {
                                 <ul className="flex flex-col pl-4 mt-1 gap-2 border-l-2 border-orange-500 md:hidden w-full">
                                 <li>
                                     <NavLink
-                                    to="/libros/avanzada"
+                                    to="/libros/busqueda"
                                     onClick={() => {
                                         setDropdownOpen(false);
                                         setMenuOpen(false);
