@@ -3,7 +3,7 @@
 :root {
   --c-beige: #f0eae5;
   --c-brown: #59380D;
-  --c-pink: #E1A8A8;
+  --c-red:#8e1e08 ;
   --c-orange: #FF8A58;
   --c-yellow: #F2C379;
 }
@@ -21,6 +21,9 @@
     background-color: var(--c-beige);
   }
 
+  .bg-brown{
+    background-color: #2c1d0ad8;
+  }
   .text-brown {
     color: var(--c-brown);
   }
@@ -32,7 +35,13 @@
   .text-orange{
     color:var(--c-orange)
   }
+  .text-red{
+    color: var(--c-red);
+  }
 
+  .text-beige{
+    color: var(--c-beige);
+  }
   .bg-orange {
     background-color: var(--c-orange);
   }
@@ -42,5 +51,13 @@
   }
   .hover\:text-orange:hover {
     color: var(--c-orange);
+  }
+
+    @media (min-width: 450px) and (max-width: 639px) {
+    .cols-between-450-sm {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
   }
 }
