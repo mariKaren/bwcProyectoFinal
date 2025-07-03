@@ -46,7 +46,7 @@ export function useAuthForm() {
             } else {
                 await register(name, email, password);
             }
-            navigate("/libros/genero");//redireccion temporal unicamente para verificar
+            navigate("/wishlist");
         } catch (error: any) {
             if (error.response?.status === 401) {
                 setGeneralError("Correo o contraseña incorrectos.");
