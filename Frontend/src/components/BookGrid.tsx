@@ -1,11 +1,6 @@
 import { Link } from "react-router";
+import type { Book } from "../types/Book";
 
-type Book = {
-    id: string;
-    title: string;
-    author: string;
-    cover: string;
-};
 
 type Props = {
     books: Book[];

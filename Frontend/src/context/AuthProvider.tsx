@@ -10,48 +10,62 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true); 
 
     const isAuthenticated = !!user;
     const isAdmin = user?.role === "admin";
+    
+    const updateAuthData = (data: User, token: string) => {
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("token", token);
+    };
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        if (storedUser && token) {
-            setUser(JSON.parse(storedUser));
-            // Verificar el token con el backend
-            console.log("Usuario actualizado:", user, isAuthenticated, isAdmin);
-            //////////////////////77
+        if (token) {
             verifyToken();
+        } else {
+            setLoading(false); // no hay necesidad de verificar si no hay token
         }
     }, []);
 
     const verifyToken = async () => {
         try {
-            const response = await api.get("/user"); // Endpoint para obtener el usuario autenticado
-            setUser(response.data);
-            localStorage.setItem("user", JSON.stringify(response.data));
+            const response = await api.get("/user"); // endpoint para obtener el usuario autenticado
+            updateAuthData(response.data, localStorage.getItem("token") || "");
         } catch (error) {
             console.error("Token no válido, cerrando sesión");
             logout();
+        }finally {
+            setLoading(false); // marca la carga como completa
         }
     };
 
     const login = async (email: string, password: string) => {
-        const response = await api.post("/login", { email, password });
-        const { data, token } = response.data;
-        setUser(data);
-        console.log("Usuario actualizado en AuthProvider:", user, isAuthenticated, isAdmin);
-        localStorage.setItem("user", JSON.stringify(data));
-        localStorage.setItem("token", token);
+        setLoading(true);
+        try {
+            const response = await api.post("/login", { email, password });
+            const { data, token } = response.data;
+            updateAuthData(data, token);
+        } catch (error) {
+            console.error("Error en login", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const register = async (name: string, email: string, password: string) => {
-        const response = await api.post("/register", { name, email, password });
-        const { data, token } = response.data;
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
-        localStorage.setItem("token", token);
+        setLoading(true);
+        try {
+            const response = await api.post("/register", { name, email, password });
+            const { data, token } = response.data;
+            updateAuthData(data, token);
+        } catch (error) {
+            console.error("Error en registro", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const logout = () => {
@@ -63,7 +77,7 @@ export const AuthProvider = ({ children }: Props) => {
 
     return (
         <AuthContext.Provider
-            value={{ user, login, register, logout, isAuthenticated, isAdmin }}
+            value={{ user, login, register, logout, isAuthenticated, isAdmin,loading }}
         >
             {children}
         </AuthContext.Provider>
