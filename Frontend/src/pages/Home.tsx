@@ -56,7 +56,7 @@ export default function Home(){
             {/* Géneros */}
             <section>
                 <h2 className="text-2xl font-semibold mb-6">Explorar por Géneros</h2>
-                <GenreLinks/>
+                <GenreLinks variant="link" />
         </section>
         </div>
     );
