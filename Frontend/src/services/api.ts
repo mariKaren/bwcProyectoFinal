@@ -31,7 +31,6 @@ api.interceptors.response.use(
         case 401:
             console.warn("No autorizado, cerrando sesión");
             localStorage.removeItem("token");
-            // Aquí podrías redirigir con react-router
             break;
         case 403:
             console.warn("Prohibido, sin permisos");
