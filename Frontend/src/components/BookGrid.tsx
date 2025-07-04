@@ -8,7 +8,7 @@ type Props = {
 };
 
 const BookGrid = ({ books,isLoading = false }: Props) => {
-    const gridColsClass = `grid-cols-1 cols-between-450-sm sm:grid-cols-4`;
+    const gridColsClass = `grid-cols-1 cols-between-450-sm sm:grid-cols-3 md:grid-cols-4`;
 
     return (
         <div>
