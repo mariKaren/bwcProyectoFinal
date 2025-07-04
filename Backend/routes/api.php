@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Reviews (accesibles para cualquier usuario autenticado)
     Route::get('/reviews', [ReviewController::class, 'index']);
     Route::get('/reviews/{id}', [ReviewController::class, 'show']);
+    Route::get('/books/{book}/reviews', [ReviewController::class, 'reviewsByBook']);
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::put('/reviews/{id}', [ReviewController::class, 'update']);
     Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);

@@ -62,6 +62,19 @@ class ReviewController extends Controller
         ], 201);
     }
 
+    public function reviewsByBook($bookId)
+    {
+        $reviews = Review::where('book_id', $bookId)
+            ->with('user:id,name') // para incluir el nombre del usuario
+            ->select('id', 'book_id', 'user_id', 'description', 'rating')
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $reviews,
+        ]);
+    }
+
     public function show($id)
     {
         $review = Review::select('id', 'book_id', 'description', 'rating')->find($id);;
