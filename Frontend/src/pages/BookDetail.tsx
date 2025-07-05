@@ -14,6 +14,9 @@ export function BookDetail() {
     const [isLoading, setIsLoading] = useState(true);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [hasUserReviewed, setHasUserReviewed] = useState(false);
+    const [showReviewForm, setShowReviewForm] = useState(false);
+    const [reviewDescription, setReviewDescription] = useState("");
+    const [reviewRating, setReviewRating] = useState(5);
 
     useEffect(() => {
         api.get(`/books/${id}`)
@@ -38,30 +41,32 @@ export function BookDetail() {
 
         //ESTABLECER QUE NO REALICE LA PETICION SI ISAUTENTICATED ES FALSE
         // para tarer las reseñas
-        api.get(`/books/${id}/reviews`)
-        .then((res) => {
-            const reviewsData = res.data.data;
-            setReviews(reviewsData);
-            
-            if (isAuthenticated && user) {
-            const alreadyReviewed = reviewsData.some((r: Review) => r.user_id === user.id);
-            setHasUserReviewed(alreadyReviewed);
-            }
-        })
-        .catch((err) => {
-            console.error("Error al cargar reseñas", err);
-        });
-        console.log(id)
-        api.get(`/wishlist`)
-            .then((res) => {
-                console.log(res)
-                const found = res.data.data.some((item: any) => item.book_id == id);//ya que viene de qp
-                setIsInWishlist(found);
-            })
-            .catch((err) => {
-                console.error("Error al verificar wishlist:", err);
-            });
-    }, [id]);
+        if(isAuthenticated){
+            api.get(`/books/${id}/reviews`)
+                .then((res) => {
+                    const reviewsData = res.data.data;
+                    setReviews(reviewsData);
+                    
+                    if (isAuthenticated && user) {
+                    const alreadyReviewed = reviewsData.some((r: Review) => r.user_id === user.id);
+                    setHasUserReviewed(alreadyReviewed);
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error al cargar reseñas", err);
+                });
+                console.log(id)
+                api.get(`/wishlist`)
+                    .then((res) => {
+                        console.log(res)
+                        const found = res.data.data.some((item: any) => item.book_id == id);//ya que viene de qp
+                        setIsInWishlist(found);
+                    })
+                    .catch((err) => {
+                        console.error("Error al verificar wishlist:", err);
+                    });
+                }
+    }, [id,isAuthenticated,user]);
     
     if (isLoading || loading) return <div>Cargando...</div>;//carga del auth o de los datos del libro
     if (!book) return <div>Libro no encontrado</div>;
@@ -99,6 +104,33 @@ export function BookDetail() {
         console.error("Error al eliminar de wishlist:", error);
         });
     }
+
+    const handleSubmitReview = async () => {
+        if (!reviewDescription || reviewRating < 1 || reviewRating > 5) {
+            alert("Por favor escribe una descripción y selecciona un rating válido.");
+            return;
+        }
+
+        try {
+            const res = await api.post(`/reviews`, {
+            book_id:book.id,
+            description: reviewDescription,
+            rating: reviewRating,
+            });
+            console.log(res)
+            setReviews((prev) => [...prev, res.data.data]); // actualiza lista local
+            setHasUserReviewed(true); // evita volver a reseñar
+            setShowReviewForm(false); // oculta el formulario
+            //resetear campos
+            setReviewDescription("");
+            setReviewRating(5);
+            alert("¡Gracias por tu reseña!");
+        } catch (err) {
+            console.error("Error al enviar reseña:", err);
+            alert("Hubo un problema al enviar la reseña.");
+        }
+        };
+    console.log(hasUserReviewed)
     return (
         <div className="p-6">
         <div className="flex flex-col md:flex-row gap-4">
@@ -166,14 +198,62 @@ export function BookDetail() {
                     Agregar a Wishlist
                 </button>
                 )}
-                <button
-                onClick={() => {/* lógica para dejar reseña */}}
-                className={`px-4 py-2 rounded text-white ${
-                hasUserReviewed ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
-                }`}
-                disabled={hasUserReviewed}>
-                {hasUserReviewed ? "Libro ya reseñado" : "Escribir Reseña"}
-                </button>
+
+                {!hasUserReviewed ? (
+                    <>
+                        <button
+                        onClick={() => setShowReviewForm((prev) => !prev)}
+                        className="bg-green-600 text-white px-4 py-2 rounded"
+                        >
+                        {showReviewForm ? "Cancelar Reseña" : "Escribir Reseña"}
+                        </button>
+
+                        {showReviewForm && (
+                        <div className="mt-4 border p-4 rounded bg-gray-50 max-w-xl">
+                            <h4 className="text-lg font-semibold mb-2">Tu Reseña</h4>
+
+                            <textarea
+                            value={reviewDescription}
+                            onChange={(e) => setReviewDescription(e.target.value)}
+                            placeholder="Escribe tu reseña..."
+                            className="w-full p-2 border rounded mb-2"
+                            rows={4}
+                            />
+
+                            <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Calificación (1 a 5)
+                            </label>
+                            <select
+                                value={reviewRating}
+                                onChange={(e) => setReviewRating(Number(e.target.value))}
+                                className="p-2 border rounded"
+                            >
+                                {[1, 2, 3, 4, 5].map((val) => (
+                                <option key={val} value={val}>
+                                    {val}
+                                </option>
+                                ))}
+                            </select>
+                            </div>
+
+                            <button
+                            onClick={handleSubmitReview}
+                            className="bg-blue-600 text-white px-4 py-2 rounded"
+                            >
+                            Enviar Reseña
+                            </button>
+                        </div>
+                        )}
+                    </>
+                    ) : (
+                    <button
+                        disabled
+                        className="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+                    >
+                        Libro ya reseñado
+                    </button>
+                    )}
             </>
             )}
 
