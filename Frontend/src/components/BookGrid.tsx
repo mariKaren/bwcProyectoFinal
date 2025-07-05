@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { Book } from "../types/Book";
+import type { Book } from "../types/book";
 
 
 type Props = {

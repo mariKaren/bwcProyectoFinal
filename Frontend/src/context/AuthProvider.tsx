@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import api from "../services/api"; // Es la instancia configurada con axios
 import type { ReactNode } from "react";
-import type { User } from "../types/User";
+import type { User } from "../types/user";
 
 interface Props {
     children: ReactNode;
