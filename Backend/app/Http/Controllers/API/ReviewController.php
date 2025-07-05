@@ -12,7 +12,9 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews = Review::select('id','book_id', 'rating', 'description')->get(); //Al ser publico para todos los usuarios autenticados, no quiero que me devuelva un user id 
+        $reviews = Review::with(['book:id,title', 'user:id,name'])
+            ->select('id', 'book_id', 'user_id', 'rating', 'description')
+            ->get();
         return response()->json([
             'status' => 'success',
             'data' => $reviews,
@@ -54,7 +56,7 @@ class ReviewController extends Controller
             'description' => $request->description,
             'rating' => $request->rating,
         ]);
-
+        $review->load('book:id,title', 'user:id,name');
         return response()->json([
             'status' => 'success',
             'message' => 'Review created successfully',
@@ -77,7 +79,9 @@ class ReviewController extends Controller
 
     public function show($id)
     {
-        $review = Review::select('id', 'book_id', 'description', 'rating')->find($id);;
+        $review = Review::with(['book:id,title', 'user:id,name'])
+        ->select('id', 'book_id', 'user_id', 'description', 'rating')
+        ->find($id);
         if (!$review) {
             return response()->json([
                 'status' => 'error',
@@ -126,6 +130,7 @@ class ReviewController extends Controller
         }
         //El user_id no es modificable
         $review->update($request->only(['book_id', 'description', 'rating']));
+        $review->load('book:id,title', 'user:id,name');
         return response()->json([
             'status' => 'success',
             'message' => 'Review updated successfully',
