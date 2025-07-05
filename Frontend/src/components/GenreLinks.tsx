@@ -1,23 +1,11 @@
 import { Link } from "react-router";
-
-type Genre = {
-    id: string;
-    name: string;
-};
+import { genres,type Genre } from "../types/genres";
 
 interface GenreLinksProps {
     variant: "link" | "button";
     onSelectGenre?: (genreId: string) => void; // opcional si es button
 }
 
-const genres: Genre[] = [
-    { id: "ficcion", name: "Ficción" },
-    { id: "fantasia", name: "Fantasía" },
-    { id: "misterio", name: "Misterio" },
-    { id: "romance", name: "Romance" },
-    { id: "drama", name: "Drama" },
-    { id: "ciencia", name: "Ciencia" }
-];
 
 function GenreLinks({ variant, onSelectGenre }: GenreLinksProps) {
     return (
