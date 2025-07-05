@@ -9,6 +9,7 @@ import {Login} from "../pages/Login";
 import {Genres} from "../pages/Genres";
 import {AdvancedSearch} from "../pages/AdvancedSearch.tsx";
 import { BookDetail } from "../pages/BookDetail.tsx";
+import { BookEdit } from "../pages/BookEdit.tsx";
 /* import {AdminPanel} from "../pages/AdminPanel"; */
 
 export default function AppRouter() {
@@ -22,6 +23,7 @@ export default function AppRouter() {
                 <Route path="/libros/genero" element={<Genres />} />
                 <Route path="/libros/busqueda" element={<AdvancedSearch />} />
                 <Route path="/libros/:id" element={<BookDetail/>} />
+                <Route path="/libros/:id/edit" element={<BookEdit />} />
                 {/* <Route path="/admin" element={<AdminPanel />} /> */}
             </Route>
 

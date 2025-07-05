@@ -1,9 +1,9 @@
-import { useParams } from "react-router";
+import { useParams,useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/useAuth";
-import type { Book } from "../types/Book";
-import type { Review } from "../types/Review";
+import type { Book } from "../types/book";
+import type { Review } from "../types/review";
 
 export function BookDetail() {
     const { id } = useParams();
@@ -17,6 +17,7 @@ export function BookDetail() {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [reviewDescription, setReviewDescription] = useState("");
     const [reviewRating, setReviewRating] = useState(5);
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get(`/books/${id}`)
@@ -131,6 +132,22 @@ export function BookDetail() {
         }
         };
     console.log(hasUserReviewed)
+
+    const handleDeleteBook = async () => {
+        if (!confirm("¿Seguro que quieres eliminar este libro? Esta acción no se puede deshacer.")) {
+            return;
+        }
+
+        try {
+            await api.delete(`/books/${book?.id}`);
+            alert("Libro eliminado exitosamente.");
+            navigate("/libros/busqueda");
+        } catch (error) {
+            console.error("Error al eliminar el libro:", error);
+            alert("Hubo un problema al eliminar el libro.");
+        }
+    };
+
     return (
         <div className="p-6">
         <div className="flex flex-col md:flex-row gap-4">
@@ -260,13 +277,13 @@ export function BookDetail() {
             {isAdmin && (
             <>
                 <button
-                onClick={() => {/* lógica editar */}}
+                onClick={() => navigate(`/libros/${book?.id}/edit`)}
                 className="bg-yellow-500 text-white px-4 py-2 rounded mr-2"
                 >
                 Editar Libro
                 </button>
                 <button
-                onClick={() => {/* lógica eliminar */}}
+                onClick={handleDeleteBook}
                 className="bg-red-600 text-white px-4 py-2 rounded"
                 >
                 Eliminar Libro
