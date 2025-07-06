@@ -4,8 +4,14 @@
   --c-beige: #f0eae5;
   --c-brown: #59380D;
   --c-red:#8e1e08 ;
+  --c-red-buttons:#df2f0b;
+  --c-red-buttons-dark:#bd290c;
+  --c-green-buttons:#16A34A;
+  --c-green-buttons-dark:#14853d;
   --c-orange: #FF8A58;
+  --c-orange-dark:#e3642d;
   --c-yellow: #F2C379;
+  --c-gray-text: #6B7280;
 }
 
 *{
@@ -20,10 +26,33 @@
   .bg-beige {
     background-color: var(--c-beige);
   }
-
   .bg-brown{
     background-color: #2c1d0ad8;
   }
+
+  .bg-orange {
+    background-color: var(--c-orange);
+  }
+  .bg-red {
+    background-color: var(--c-red-buttons);
+  }
+  .bg-green {
+    background-color: var(--c-green-buttons);
+  }
+  .hover\:bg-green:hover {
+    background-color:var(--c-green-buttons-dark);
+  }
+  .hover\:bg-orange-dark:hover {
+    background-color:var(--c-orange-dark);
+  }
+  .hover\:bg-red-dark:hover {
+    background-color:var(--c-red-buttons-dark);
+  }
+
+  .hover\:bg-yellow:hover {
+    background-color: var(--c-yellow);
+  }
+
   .text-brown {
     color: var(--c-brown);
   }
@@ -42,16 +71,14 @@
   .text-beige{
     color: var(--c-beige);
   }
-  .bg-orange {
-    background-color: var(--c-orange);
-  }
-
-  .hover\:bg-yellow:hover {
-    background-color: var(--c-yellow);
+  
+  .text-gray{
+    color: var(--c-gray-text);
   }
   .hover\:text-orange:hover {
     color: var(--c-orange);
   }
+
   .hover\:text-red:hover {
     color: var(--c-red);
   }

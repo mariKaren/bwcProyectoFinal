@@ -37,7 +37,7 @@ export function BookDetail() {
     return (
         <div className="p-6">
             <BookInfo book={book} />
-            <hr className="my-6" />
+
             <ReviewList
                 reviews={reviews}
                 isAuthenticated={isAuthenticated}
@@ -45,7 +45,7 @@ export function BookDetail() {
                 user={user}
                 handleDeleteReview={handleDeleteReview}
             />
-            <div className="mt-6">
+            <div className="mt-3">
                 {isUser && (
                 <>
                     <WishlistButton
@@ -57,7 +57,7 @@ export function BookDetail() {
                     <>
                         <button
                         onClick={() => setShowReviewForm((prev) => !prev)}
-                        className="bg-green-600 text-white px-4 py-2 rounded ml-2"
+                        className="bg-green hover:bg-green text-white px-4 py-2 rounded mt-4"
                         >
                         {showReviewForm ? "Cancelar Reseña" : "Escribir Reseña"}
                         </button>
@@ -84,13 +84,13 @@ export function BookDetail() {
                 <>
                     <button
                     onClick={() => navigate(`/libros/${book?.id}/edit`)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded mr-2"
+                    className="bg-orange hover:bg-orange-dark text-white px-4 py-2 rounded mr-2"
                     >
                     Editar Libro
                     </button>
                     <button
                     onClick={handleDeleteBook}
-                    className="bg-red-600 text-white px-4 py-2 rounded"
+                    className="bg-red hover:bg-red-dark text-white px-4 py-2 rounded"
                     >
                     Eliminar Libro
                     </button>

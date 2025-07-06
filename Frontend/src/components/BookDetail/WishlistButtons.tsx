@@ -12,14 +12,14 @@ export const WishlistButton = ({
         return isInWishlist ? (
             <button
             onClick={handleRemoveFromWishlist}
-            className="bg-red-600 text-white px-4 py-2 rounded"
+            className="bg-red hover:bg-red-dark text-white px-4 py-2 rounded transition duration-300 mr-3"
             >
                 Eliminar de Wishlist
             </button>
         ) : (
             <button
             onClick={handleAddToWishlist}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-orange text-white hover:bg-orange-dark px-4 py-2 rounded transition duration-300 mr-3"
             >
                 Agregar a Wishlist
             </button>

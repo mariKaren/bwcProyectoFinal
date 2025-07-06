@@ -18,17 +18,17 @@ export const ReviewForm = ({
     if (!showReviewForm) return null;
 
     return (
-        <div className="mt-4 border p-4 rounded bg-gray-50 max-w-xl">
-            <h4 className="text-lg font-semibold mb-2">Tu Reseña</h4>
+        <div className="mt-6 border border-gray-400 p-4 rounded max-w-xl">
+            <h4 className="text-lg text-brown font-semibold mb-3">Tu Reseña</h4>
             <textarea
                 value={reviewDescription}
                 onChange={(e) => setReviewDescription(e.target.value)}
                 placeholder="Escribe tu reseña..."
-                className="w-full p-2 border rounded mb-2"
+                className="w-full p-2 border rounded mb-2 resize-none"
                 rows={4}
             />
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray mb-3">
                 Calificación (1 a 5)
                 </label>
                 <select
@@ -43,12 +43,15 @@ export const ReviewForm = ({
                 ))}
                 </select>
             </div>
-            <button
+            <div className="text-center">
+                <button
                 onClick={handleSubmitReview}
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-                Enviar Reseña
-            </button>
+                className="bg-orange hover:bg-orange-dark text-white px-6 py-2 rounded"
+                >
+                    Enviar Reseña
+                </button>
+            </div>
+            
         </div>
     );
 }

@@ -2,17 +2,21 @@ import type { Book } from "../../types/book";
 
 export function BookInfo({ book }: { book: Book }) {
     return (
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-9 rounded-xl p-6 bg-beige shadow-sm">
             <img
                 src={book.cover || "/images/placeholder.jpg"}
                 alt={book.title}
-                className="w-48 h-auto rounded shadow"
+                className="w-60 h-auto rounded-lg"
             />
-            <div>
-                <h2 className="text-3xl font-bold">{book.title}</h2>
-                <p className="text-gray-600">{book.author}</p>
-                <p className="text-gray-600">Género: {book.genre || "Desconocido"}</p>
-                <p className="text-gray-600">Publicado: {book.published_date || "N/A"}</p>
+            <div className="flex-1">
+                <h2 className="text-4xl text-brown font-bold">{book.title}</h2>
+                <p className="text-lg text-gray-700 mt-2">{book.author}</p>
+                <p className="text-sm text-gray mt-3">
+                    <span className="font-medium">Género:</span> {book.genre || "Desconocido"}
+                </p>
+                <p className="text-sm text-gray mt-2">
+                    <span className="font-medium">Publicado:</span> {book.published_date || "N/A"}
+                </p>
                 {book.description && (
                 <p className="mt-4 text-gray-700">{book.description}</p>
                 )}
