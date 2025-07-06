@@ -1,11 +1,11 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { genres, type Genre } from "../types/genres";
+import { genres} from "../types/genres";
 import api from "../services/api";
 
 type Author = {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
 };
 
 export function BookEdit() {
