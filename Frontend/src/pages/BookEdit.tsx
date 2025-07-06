@@ -88,94 +88,97 @@ export function BookEdit() {
     if (loading) return <div>Cargando datos...</div>;
 
     return (
-        <div className="p-6 max-w-lg mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Editar Libro</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-            <label>Título</label>
-            <input
-                type="text"
-                name="title"
-                value={bookData.title}
-                onChange={handleChange}
-                required
-                className="w-full border p-2 rounded"
-            />
-            </div>
+        <div className="pt-5 max-w-lg mx-auto">
+            <h2 className="text-2xl text-brown text-center font-bold mb-5">Editar Libro</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                <label>Título</label>
+                <input
+                    type="text"
+                    name="title"
+                    value={bookData.title}
+                    onChange={handleChange}
+                    required
+                    className="w-full border p-2 rounded"
+                />
+                </div>
 
-            <div>
-            <label>Autor</label>
-            <select
-                name="author_id"
-                value={bookData.author_id}
-                onChange={handleChange}
-                required
-                className="w-full border p-2 rounded"
-            >
-                <option value="">Seleccione un autor</option>
-                {authors.map((author) => (
-                <option key={author.id} value={author.id}>
-                    {author.name}
-                </option>
-                ))}
-            </select>
-            </div>
+                <div>
+                <label>Autor</label>
+                <select
+                    name="author_id"
+                    value={bookData.author_id}
+                    onChange={handleChange}
+                    required
+                    className="w-full border p-2 rounded"
+                >
+                    <option value="">Seleccione un autor</option>
+                    {authors.map((author) => (
+                    <option key={author.id} value={author.id}>
+                        {author.name}
+                    </option>
+                    ))}
+                </select>
+                </div>
 
-            <div>
-            <label>Género</label>
-            <select
-                name="genre"
-                value={bookData.genre}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-            >
-                <option value="">Seleccione un género</option>
-                {genres.map((g) => (
-                <option key={g.id} value={g.id}>
-                    {g.name}
-                </option>
-                ))}
-            </select>
-            </div>
+                <div>
+                <label>Género</label>
+                <select
+                    name="genre"
+                    value={bookData.genre}
+                    onChange={handleChange}
+                    className="w-full border p-2 rounded"
+                >
+                    <option value="">Seleccione un género</option>
+                    {genres.map((g) => (
+                    <option key={g.id} value={g.id}>
+                        {g.name}
+                    </option>
+                    ))}
+                </select>
+                </div>
 
-            <div>
-            <label>Fecha de publicación</label>
-            <input
-                type="date"
-                name="publication_date"
-                value={bookData.publication_date}
-                onChange={handleChange}
-                required
-                className="w-full border p-2 rounded"
-            />
-            </div>
+                <div>
+                <label>Fecha de publicación</label>
+                <input
+                    type="date"
+                    name="publication_date"
+                    value={bookData.publication_date}
+                    onChange={handleChange}
+                    required
+                    className="w-full border p-2 rounded"
+                />
+                </div>
 
-            <div>
-            <label>Descripción</label>
-            <textarea
-                name="description"
-                value={bookData.description}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                rows={4}
-            />
-            </div>
-
-            <button
-            type="submit"
-            disabled={saving}
-            className="bg-green hover:bg-green text-white px-4 py-2 rounded"
-            >
-            {saving ? "Guardando..." : "Guardar Cambios"}
-            </button>
-            <button
-                type="button"
-                onClick={() => navigate(`/libros/${id}`)}
-                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
-            >
-                Cancelar
-            </button>
-        </form>
+                <div>
+                <label>Descripción</label>
+                <textarea
+                    name="description"
+                    value={bookData.description}
+                    onChange={handleChange}
+                    className="w-full border p-2 rounded"
+                    rows={4}
+                />
+                </div>
+                
+                <div className="flex flex-wrap justify-between gap-4">
+                    <button
+                    type="submit"
+                    disabled={saving}
+                    className="bg-green hover:bg-green text-white px-4 py-2 rounded"
+                    >
+                    {saving ? "Guardando..." : "Guardar Cambios"}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => navigate(`/libros/${id}`)}
+                        className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                    >
+                        Cancelar
+                    </button>
+                </div>
+                
+            </form>
         </div>
     );
 }

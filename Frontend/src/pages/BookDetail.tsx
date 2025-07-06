@@ -35,7 +35,7 @@ export function BookDetail() {
     const isUser = isAuthenticated && user?.role === "user";
     console.log(user)
     return (
-        <div className="p-6">
+        <div className="pt-6">
             <BookInfo book={book} />
 
             <ReviewList
@@ -45,7 +45,7 @@ export function BookDetail() {
                 user={user}
                 handleDeleteReview={handleDeleteReview}
             />
-            <div className="mt-3">
+            <div className="mt-6">
                 {isUser && (
                 <>
                     <WishlistButton
