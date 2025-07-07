@@ -3,6 +3,7 @@ import { BookInfo } from "../components/BookDetail/BookInfo";
 import { ReviewList } from "../components/BookDetail/ReviewList";
 import { ReviewForm } from "../components/BookDetail/ReviewForm";
 import { WishlistButton } from "../components/BookDetail/WishlistButtons";
+import { Message } from "../components/Message";
 
 export function BookDetail() {
     const {
@@ -18,6 +19,8 @@ export function BookDetail() {
         isAuthenticated,
         isAdmin,
         user,
+        message,
+        setMessage,
         setShowReviewForm,
         setReviewDescription,
         setReviewRating,
@@ -33,9 +36,16 @@ export function BookDetail() {
     if (!book) return <div>Libro no encontrado</div>;
 
     const isUser = isAuthenticated && user?.role === "user";
-    console.log(user)
+
     return (
         <div className="pt-6">
+            {message && (
+                <Message
+                messageText={message.messageText}
+                type={message.type}
+                onClose={() => setMessage(null)}
+                />
+            )}
             <BookInfo book={book} />
 
             <ReviewList

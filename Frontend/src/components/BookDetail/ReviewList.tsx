@@ -17,7 +17,7 @@ export const ReviewList = ({
     handleDeleteReview,
     }: ReviewListProps) => {
     if (!isAuthenticated) {
-        return <p className="text-gray">Debe iniciar sesión para ver las reseñas</p>;
+        return <p className="text-gray mt-7">Debe iniciar sesión para ver las reseñas</p>;
     }
 
     return (
