@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { genres} from "../types/genres";
 import api from "../services/api";
+import { Message } from "../components/Message";
+import type { MessageState } from "../types/message";
 
 type Author = {
     id: number;
@@ -23,38 +25,44 @@ export function BookEdit() {
     const [authors, setAuthors] = useState<Author[]>([]);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [message, setMessage] = useState<MessageState | null>(null);
+
+    // Función para mostrar mensajes
+    const showMessage = (messageText:string,type:MessageState['type']) => {
+        setMessage({ messageText, type });
+        setTimeout(() => setMessage(null), 3000); // Auto-cerrar después de 3s
+    };
 
     function formatDate(dateStr: string): string {
-  // Esperamos el formato "DD/MM/YYYY"
-    const [day, month, year] = dateStr.split("/");
-    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    // Esperamos el formato "DD/MM/YYYY"
+        const [day, month, year] = dateStr.split("/");
+        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
     // Obtener datos del libro
     useEffect(() => {
         const fetchData = async () => {
-        try {
-            const [bookRes, authorsRes] = await Promise.all([
-            api.get(`/books/${id}`),
-            api.get("/authors"),
-            ]);
-            console.log(bookRes)
-            const book = bookRes.data.data;
-            const authorsList = authorsRes.data.data;
+            try {
+                const [bookRes, authorsRes] = await Promise.all([
+                    api.get(`/books/${id}`),
+                    api.get("/authors"),
+                ]);
+                const book = bookRes.data.data;
+                const authorsList = authorsRes.data.data;
 
-            setBookData({
-            title: book.title || "",
-            author_id: String(book.author.id) || "",
-            genre: book.genre || "",
-            publication_date: formatDate(book.publication_date) || "",
-            description: book.description || "",
-            });
+                setBookData({
+                title: book.title || "",
+                author_id: String(book.author.id) || "",
+                genre: book.genre || "",
+                publication_date: formatDate(book.publication_date) || "",
+                description: book.description || "",
+                });
 
-            setAuthors(authorsList);
-        } catch (err) {
-            alert("Error al cargar datos");
-        } finally {
-            setLoading(false);
-        }
+                setAuthors(authorsList);
+            } catch {
+                showMessage("Error al cargar datos", "error");
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchData();
@@ -71,17 +79,30 @@ export function BookEdit() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Validaciones
+        if (!bookData.title.trim()) {
+        showMessage("El título es obligatorio", "error");
+        return;
+        }
+        if (!bookData.author_id) {
+        showMessage("Debe seleccionar un autor", "error");
+        return;
+        }
+        if (!bookData.publication_date) {
+        showMessage("La fecha de publicación es obligatoria", "error");
+        return;
+        }
         setSaving(true);
 
         try {
-        await api.put(`/books/${id}`, bookData);
-        alert("Libro actualizado correctamente");
-        navigate(`/libros/${id}`);
+            await api.put(`/books/${id}`, bookData);
+            showMessage("Libro actualizado correctamente", "success");
+            console.log(message)
+            setTimeout(() => navigate(`/libros/${id}`), 1000);
         } catch (error) {
-        console.error(error);
-        alert("Error al actualizar el libro");
+            showMessage("Error al actualizar el libro", "error");
         } finally {
-        setSaving(false);
+            setSaving(false);
         }
     };
 
@@ -90,6 +111,13 @@ export function BookEdit() {
     return (
         <div className="pt-5 max-w-lg mx-auto">
             <h2 className="text-2xl text-brown text-center font-bold mb-5">Editar Libro</h2>
+            {message && (
+                <Message
+                messageText={message.messageText}
+                type={message.type}
+                onClose={() => setMessage(null)}
+                />
+            )}
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                 <label>Título</label>
