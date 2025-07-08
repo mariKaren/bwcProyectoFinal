@@ -51,7 +51,6 @@ export const useBookDetail = () => {
                 setIsLoading(false);
             })
             .catch(() => {
-                showMessage("Libro no encontrado", "error");
                 setIsLoading(false);
                 setTimeout(() => navigate(`/libros/busqueda`), 2000);
             }

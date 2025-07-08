@@ -89,7 +89,9 @@ export function Login() {
                 <button
                     onClick={() => {
                             setIsLogin(!isLogin);
-                            setErrors({});}}
+                            setErrors({});
+                            setGeneralError("");
+                        }}
                     className="text-red hover:underline font-medium"
                 >
                     {isLogin ? "Registrate" : "Iniciá sesión"}

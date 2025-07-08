@@ -10,7 +10,7 @@ export function useAuthForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});//errores propios del formulario
     const [generalError, setGeneralError] = useState("");//errores del backend, como mail ya existente o credenciales invalidas
     const navigate = useNavigate();
-    const { login, register } = useAuth();
+    const { login, register,isAuthenticated } = useAuth();
 
     const validate = () => {
         const newErrors: { [key: string]: string } = {};
@@ -35,6 +35,7 @@ export function useAuthForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setGeneralError("");
+        setErrors({});
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -46,16 +47,31 @@ export function useAuthForm() {
             } else {
                 await register(name, email, password);
             }
-            navigate("/wishlist");
+            if (isAuthenticated) {
+                navigate("/wishlist");
+                // Limpiar campos después de un intento exitoso
+                setEmail("");
+                setPassword("");
+                setName("");
+            }
         } catch (error: any) {
             if (error.response?.status === 401) {
                 setGeneralError("Correo o contraseña incorrectos.");
-            } else if (error.response?.status === 422) {
-                setGeneralError("Datos inválidos. Verificá el formulario.");
+            }else if (error.response?.status === 422) {
+                const errors = error.response?.data?.errors;
+                if (errors?.email?.includes("The email has already been taken.")) {
+                    setGeneralError("El correo ya está registrado.");
+                } else {
+                    setGeneralError("Datos inválidos. Verificá el formulario.");
+                } 
             } else {
                 setGeneralError("Ocurrió un error inesperado.");
             }
             console.error("Error de autenticación", error);
+            // Limpiar campos después de un intento fallido
+            setEmail("");
+            setPassword("");
+            setName("");
         }
     };
 

@@ -15,9 +15,12 @@ export const AuthProvider = ({ children }: Props) => {
     const isAuthenticated = !!user;
     const isAdmin = user?.role === "admin";
     
-    const updateAuthData = (data: User, token: string) => {
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
+    const updateAuthData = (response: any, token: string) => {
+        if (!response?.data || !token || response.status !== "success") {
+            throw new Error("Respuesta de autenticación inválida");
+        }
+        setUser(response.data)
+        localStorage.setItem("user", JSON.stringify(response.data));
         localStorage.setItem("token", token);
     };
 
@@ -33,7 +36,9 @@ export const AuthProvider = ({ children }: Props) => {
     const verifyToken = async () => {
         try {
             const response = await api.get("/user"); // endpoint para obtener el usuario autenticado
-            updateAuthData(response.data, localStorage.getItem("token") || "");
+            setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("token", localStorage.getItem("token") || "");
         } catch (error) {
             console.error("Token no válido, cerrando sesión");
             logout();
@@ -46,10 +51,10 @@ export const AuthProvider = ({ children }: Props) => {
         setLoading(true);
         try {
             const response = await api.post("/login", { email, password });
-            const { data, token } = response.data;
-            updateAuthData(data, token);
+            updateAuthData(response.data, response.data.token);
         } catch (error) {
             console.error("Error en login", error);
+            throw error;
         } finally {
             setLoading(false);
         }
@@ -59,10 +64,10 @@ export const AuthProvider = ({ children }: Props) => {
         setLoading(true);
         try {
             const response = await api.post("/register", { name, email, password });
-            const { data, token } = response.data;
-            updateAuthData(data, token);
+            updateAuthData(response.data, response.data.token);
         } catch (error) {
             console.error("Error en registro", error);
+            throw error;
         } finally {
             setLoading(false);
         }
