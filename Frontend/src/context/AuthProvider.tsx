@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: Props) => {
         const token = localStorage.getItem("token");
         try {
             if (token) {
-                await api.post("/logout"); // Usa await para manejar la promesa
+                await api.post("/logout");
             }
         } catch (error) {
             console.error("Error al cerrar sesión en el servidor:", error);

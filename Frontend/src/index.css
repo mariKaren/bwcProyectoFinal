@@ -39,6 +39,9 @@
   .bg-green {
     background-color: var(--c-green-buttons);
   }
+  .bg-orange-dark{
+    background-color: var(--c-orange-dark);
+  }
   .hover\:bg-green:hover {
     background-color:var(--c-green-buttons-dark);
   }

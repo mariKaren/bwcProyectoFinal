@@ -30,7 +30,6 @@ api.interceptors.response.use(
         switch (status) {
         case 401:
             console.warn("No autorizado");
-            localStorage.removeItem("token");
             break;
         case 403:
             console.warn("Prohibido, sin permisos");
