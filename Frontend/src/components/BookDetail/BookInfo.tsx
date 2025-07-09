@@ -15,7 +15,7 @@ export function BookInfo({ book }: { book: Book }) {
                     <span className="font-medium">Género:</span> {book.genre || "Desconocido"}
                 </p>
                 <p className="text-sm text-gray mt-2">
-                    <span className="font-medium">Publicado:</span> {book.published_date || "N/A"}
+                    <span className="font-medium">Publicado:</span> {book.publication_date || "N/A"}
                 </p>
                 {book.description && (
                 <p className="mt-4 text-gray-700">{book.description}</p>

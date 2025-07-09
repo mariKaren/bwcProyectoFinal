@@ -45,7 +45,7 @@ export const useBookDetail = () => {
                 cover: raw.cover || "/src/assets/portada.jpg",
                 genre: raw.genre,
                 description: raw.description,
-                published_date: raw.publication_date,
+                publication_date: raw.publication_date,
                 };
                 setBook(bookData);
                 setIsLoading(false);
