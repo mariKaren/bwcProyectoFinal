@@ -55,17 +55,16 @@
   .hover\:bg-yellow:hover {
     background-color: var(--c-yellow);
   }
+  .hover\:bg-beige:hover {
+    background-color: var(--c-beige);
+  }
 
   .text-brown {
     color: var(--c-brown);
   }
 
-  .text-pink {
-    color: var(--c-pink);
-  }
-
   .text-orange{
-    color:var(--c-orange)
+    color:var(--c-orange-dark)
   }
   .text-red{
     color: var(--c-red);

@@ -10,7 +10,9 @@ import {Genres} from "../pages/Genres";
 import {AdvancedSearch} from "../pages/AdvancedSearch.tsx";
 import { BookDetail } from "../pages/BookDetail.tsx";
 import { BookEdit } from "../pages/BookEdit.tsx";
-/* import {AdminPanel} from "../pages/AdminPanel"; */
+import {AdminPanel} from "../pages/admin/AdminPanel.tsx";
+import BookCreate from "../pages/admin/BookCreate.tsx";
+import AuthorCreate from "../pages/admin/AuthorCreate.tsx";
 
 export default function AppRouter() {
     return (
@@ -24,7 +26,9 @@ export default function AppRouter() {
                 <Route path="/libros/busqueda" element={<AdvancedSearch />} />
                 <Route path="/libros/:id" element={<BookDetail/>} />
                 <Route path="/libros/:id/edit" element={<BookEdit />} />
-                {/* <Route path="/admin" element={<AdminPanel />} /> */}
+                <Route path="/admin" element={<AdminPanel />} />
+                <Route path="/admin/libros/crear" element={<BookCreate/>} />
+                <Route path="/admin/autores/crear" element={<AuthorCreate/>} />
             </Route>
 
             {/* Login y registro fuera del layout */}
