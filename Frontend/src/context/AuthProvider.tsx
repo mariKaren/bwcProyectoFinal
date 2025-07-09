@@ -73,11 +73,20 @@ export const AuthProvider = ({ children }: Props) => {
         }
     };
 
-    const logout = () => {
-        api.post("/logout").catch((error) => console.error("Error al cerrar sesión", error));
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        setUser(null);
+    const logout = async () => {
+        const token = localStorage.getItem("token");
+        try {
+            if (token) {
+                await api.post("/logout"); // Usa await para manejar la promesa
+            }
+        } catch (error) {
+            console.error("Error al cerrar sesión en el servidor:", error);
+        } finally {
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            setUser(null);
+            console.log("Logout local completado");
+        }
     };
 
     return (
