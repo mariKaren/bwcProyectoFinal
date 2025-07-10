@@ -9,12 +9,35 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::with('author')->get();
+        $query = Book::with('author');
+
+        // Búsqueda por título
+        if ($request->has('title')) {
+            $query->where('title', 'like', '%' . $request->input('title') . '%');
+        }
+
+        // Búsqueda por autor
+        if ($request->has('author')) {
+            $query->whereHas('author', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->input('author') . '%');
+            });
+        }
+
+        // Paginación (20 libros por página)
+        $perPage = 20;
+        $books = $query->paginate($perPage);
+
         return response()->json([
             'status' => 'success',
-            'data' => $books,
+            'data' => $books->items(),
+            'pagination' => [
+                'current_page' => $books->currentPage(),
+                'last_page' => $books->lastPage(),
+                'per_page' => $books->perPage(),
+                'total' => $books->total(),
+            ],
         ], 200);
     }
 
