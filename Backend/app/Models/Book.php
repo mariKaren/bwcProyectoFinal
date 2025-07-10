@@ -36,4 +36,24 @@ class Book extends Model
     {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
     }
+
+    public function featuredBooks()
+    {
+        return $this->hasMany(FeaturedBook::class);
+    }
+
+    public function isFeatured(): bool
+    {
+        return $this->featuredBooks()->exists();
+    }
+
+    protected static function boot(){
+        parent::boot();
+
+        static::deleting(function ($book) {
+            if ($book->featuredBooks()->exists()) {
+                throw new \Exception('No se puede eliminar un libro que está destacado.');
+            }
+        });
+    }
 }

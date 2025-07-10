@@ -7,6 +7,7 @@ use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\ReviewController;
 use App\Http\Controllers\API\WishlistController;
+use App\Http\Controllers\api\FeaturedBookController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -17,6 +18,7 @@ Route::get('/authors', [AuthorController::class, 'index']);
 Route::get('/authors/{id}', [AuthorController::class, 'show']);
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{id}', [BookController::class, 'show']);
+Route::get('/featured-books', [FeaturedBookController::class, 'index']);
 
 // Rutas de autenticación
 Route::post('/register', [AuthController::class, 'register']);
@@ -38,6 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/books', [BookController::class, 'store']);
         Route::put('/books/{id}', [BookController::class, 'update']);
         Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+        //Featured Books
+        Route::post('/featured-books', [FeaturedBookController::class, 'store']);
+        Route::delete('/featured-books/{book_id}', [FeaturedBookController::class, 'destroy']);
     });
 
     // Reviews (accesibles para cualquier usuario autenticado)
