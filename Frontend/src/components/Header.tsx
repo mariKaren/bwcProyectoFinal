@@ -134,13 +134,13 @@ export default function Header() {
                         {/* Quienes somos */}
                         <li className="w-full md:w-auto">
                             <NavLink
-                                to="/quienes-somos"
+                                to="/sobre-nosotros"
                                 className={({ isActive }) =>`pr-2 py-1 md:pl-2 transition-all duration-300 ease-in-out 
                                 ${isActive ? "text-orange font-semibold " : ""}hover:border-b-2 hover:border-r-2 border-transparent hover:border-[var(--c-yellow)] hover:shadow-md`
                                 }
                                 onClick={() => setMenuOpen(false)}
                             >
-                                Quiénes somos
+                                Sobre nosotros
                             </NavLink>
                         </li>
 

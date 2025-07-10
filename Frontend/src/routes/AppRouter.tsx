@@ -3,7 +3,7 @@ import Layout from "../layout/Layout";
 import { AdminRoute } from "./AdminRoute"; 
 
 import Home from "../pages/Home";
-import {About} from "../pages/About";
+import About from "../pages/About";
 import {Contact} from "../pages/Contact";
 import {Wishlist} from "../pages/Wishlist";
 import {Login} from "../pages/Login";
@@ -20,7 +20,7 @@ export default function AppRouter() {
         <Routes>
             <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/quienes-somos" element={<About />} />
+                <Route path="/sobre-nosotros" element={<About />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/libros/genero" element={<Genres />} />
