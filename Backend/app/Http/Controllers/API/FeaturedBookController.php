@@ -18,7 +18,7 @@ class FeaturedBookController extends Controller
         try {
             $featured = FeaturedBook::with('book.author')
                 ->orderBy('position')
-                ->take(4) 
+                ->take(8) 
                 ->get()
                 ->pluck('book');
 
