@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { genres} from "../types/genres";
-import api from "../services/api";
-import { Message } from "../components/Message";
-import type { MessageState } from "../types/message";
+import { genres} from "../../types/genres";
+import api from "../../services/api";
+import { Message } from "../../components/Message";
+import type { MessageState } from "../../types/message";
 
 type Author = {
     id: number;

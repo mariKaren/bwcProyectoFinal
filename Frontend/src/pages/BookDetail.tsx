@@ -93,7 +93,7 @@ export function BookDetail() {
                 {isAdmin && (
                 <>
                     <button
-                    onClick={() => navigate(`/libros/${book?.id}/edit`)}
+                    onClick={() => navigate(`admin/libros/${book?.id}/edit`)}
                     className="bg-orange hover:bg-orange-dark text-white px-4 py-2 rounded mr-2"
                     >
                     Editar Libro
