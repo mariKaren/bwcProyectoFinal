@@ -4,7 +4,7 @@ import { AdminRoute } from "./AdminRoute";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
-import {Contact} from "../pages/Contact";
+import Contact from "../pages/Contact";
 import {Wishlist} from "../pages/Wishlist";
 import {Login} from "../pages/Login";
 import {Genres} from "../pages/Genres";
