@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useAuth } from "../context/useAuth";
 import { useNavigate } from "react-router";
 
@@ -10,7 +10,7 @@ export function useAuthForm() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});//errores propios del formulario
     const [generalError, setGeneralError] = useState("");//errores del backend, como mail ya existente o credenciales invalidas
     const navigate = useNavigate();
-    const { login, register,isAuthenticated } = useAuth();
+    const { login, register,isAuthenticated,loading,isAdmin} = useAuth();
 
     const validate = () => {
         const newErrors: { [key: string]: string } = {};
@@ -47,13 +47,6 @@ export function useAuthForm() {
             } else {
                 await register(name, email, password);
             }
-            if (isAuthenticated) {
-                navigate("/wishlist");
-                // Limpiar campos después de un intento exitoso
-                setEmail("");
-                setPassword("");
-                setName("");
-            }
         } catch (error: any) {
             if (error.response?.status === 401) {
                 setGeneralError("Correo o contraseña incorrectos.");
@@ -74,6 +67,18 @@ export function useAuthForm() {
             setName("");
         }
     };
+    useEffect(() => {
+        if (!loading && isAuthenticated) {
+            if (isAdmin){
+                navigate("/admin")
+            }else{
+                navigate("/wishlist");
+            }
+            setEmail("");
+            setPassword("");
+            setName("");
+        }
+    }, [isAuthenticated,isAdmin,loading]);
 
     return {
         isLogin,
@@ -89,5 +94,6 @@ export function useAuthForm() {
         generalError,
         setGeneralError,
         handleSubmit,
+        loading,
     };
 }

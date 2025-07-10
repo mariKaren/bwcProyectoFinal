@@ -14,7 +14,7 @@ export function Login() {
     setErrors,
     generalError,
     setGeneralError,
-    handleSubmit,} =useAuthForm();
+    handleSubmit,loading} =useAuthForm();
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md bg-white px-8 py-16 mx-6 m-x-450-sm  rounded-2xl shadow-xl">
@@ -81,7 +81,13 @@ export function Login() {
                     type="submit"
                     className="w-full bg-orange text-white py-2 rounded-lg hover:bg-yellow hover:text-red font-semibold transition-colors duration-400"
                 >
-                    {isLogin ? "Entrar" : "Registrarse"}
+                    {loading
+                        ? isLogin
+                            ? "Iniciando sesión..."
+                            : "Registrando usuario..."
+                        : isLogin
+                            ? "Entrar"
+                            : "Registrarse"}
                 </button>
             </form>
             <p className="mt-4 text-center text-sm text-gray-600">
