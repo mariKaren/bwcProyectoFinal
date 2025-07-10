@@ -7,7 +7,6 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import {Wishlist} from "../pages/Wishlist";
 import {Login} from "../pages/Login";
-import {Genres} from "../pages/Genres";
 import AdvancedSearch from "../pages/AdvancedSearch.tsx";
 import { BookDetail } from "../pages/BookDetail.tsx";
 import { BookEdit } from "../pages/admin/BookEdit.tsx";
@@ -23,7 +22,6 @@ export default function AppRouter() {
                 <Route path="/sobre-nosotros" element={<About />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/libros/genero" element={<Genres />} />
                 <Route path="/libros/busqueda" element={<AdvancedSearch />} />
                 <Route path="/libros/:id" element={<BookDetail/>} />
                 {/* Rutas protegidas admin */}
