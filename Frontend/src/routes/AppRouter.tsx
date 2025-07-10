@@ -8,7 +8,7 @@ import {Contact} from "../pages/Contact";
 import {Wishlist} from "../pages/Wishlist";
 import {Login} from "../pages/Login";
 import {Genres} from "../pages/Genres";
-import {AdvancedSearch} from "../pages/AdvancedSearch.tsx";
+import AdvancedSearch from "../pages/AdvancedSearch.tsx";
 import { BookDetail } from "../pages/BookDetail.tsx";
 import { BookEdit } from "../pages/admin/BookEdit.tsx";
 import {AdminPanel} from "../pages/admin/AdminPanel.tsx";

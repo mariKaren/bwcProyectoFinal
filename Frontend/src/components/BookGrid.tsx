@@ -29,13 +29,13 @@ const BookGrid = ({ books,isLoading = false }: Props) => {
                 className="bg-white rounded shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                 <img
-                    src={book.cover}
+                    src={book.cover || "/src/assets/portada.jpg"}
                     alt={`Portada de ${book.title}`}
                     className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
                     <h3 className="font-semibold text-lg">{book.title}</h3>
-                    <p className="text-gray-600">{book.author}</p>
+                    <p className="text-gray-600">{book.author.name}</p>
                 </div>
                 </Link>
             ))}

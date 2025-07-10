@@ -38,10 +38,12 @@ export const useBookDetail = () => {
         .get(`/books/${id}`)
             .then((res) => {
                 const raw = res.data.data;
+                console.log(raw)
                 const bookData: Book = {
                 id: raw.id,
                 title: raw.title,
-                author: raw.author.name,
+                author: raw.author,
+                author_id:raw.author_id,
                 cover: raw.cover || "/src/assets/portada.jpg",
                 genre: raw.genre,
                 description: raw.description,
