@@ -27,7 +27,7 @@ export const ReviewList = ({
                 <ul className="space-y-2">
                 {reviews.map((r) => (
                     <li key={r.id} className="border border-gray-400 p-2 rounded">
-                        <strong>{r.user?.name}</strong>: {r.description}
+                        <p><strong>{r.user?.name}</strong>: {r.description}</p>
                         <div className="text-sm text-gray mt-1">
                             <p> Rating: {r.rating}/5</p>
                         </div>
