@@ -33,7 +33,7 @@ export default function Header() {
                 </button>
 
                 {/* Nav */}
-                <nav className={`${ menuOpen ? "block" : "hidden" } md:flex md:items-center absolute md:static top-24 left-0 w-full md:w-auto bg-beige z-20 px-6 md:px-0 lg:text-lg`}>
+                <nav className={`${ menuOpen ? "block" : "hidden" } md:flex md:items-center absolute md:static top-18 left-0 w-full md:w-auto bg-beige z-20 px-6 md:px-0 lg:text-lg`}>
                     <ul className="flex flex-col md:flex-row gap-4 md:gap-8 lg:gap-12 md:items-center text-brown w-full md:w-auto">
 
                         {/* Libros */}
@@ -178,6 +178,14 @@ export default function Header() {
                                                 </NavLink>
                                                 </li>
                                             )}
+                                            <li>
+                                                <button
+                                                onClick={handleLogout}
+                                                className="block text-brown hover:text-orange transition-all duration-300"
+                                                >
+                                                Logout
+                                                </button>
+                                            </li>
                                         </ul>
                                     )}
                                     </div>

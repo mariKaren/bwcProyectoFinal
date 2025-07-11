@@ -4,11 +4,7 @@ import { genres} from "../../types/genres";
 import api from "../../services/api";
 import { Message } from "../../components/Message";
 import type { MessageState } from "../../types/message";
-
-type Author = {
-    id: number;
-    name: string;
-};
+import type { Author } from "../../types/author";
 
 export default function BookEdit() {
     const { id } = useParams();
@@ -108,8 +104,8 @@ export default function BookEdit() {
     if (loading) return <div>Cargando datos...</div>;
 
     return (
-        <div className="pt-5 max-w-lg mx-auto">
-            <h2 className="text-2xl text-brown text-center font-bold mb-5">Editar Libro</h2>
+        <div className="p-4 max-w-2xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-semibold text-red text-center mb-4">Editar Libro</h2>
             {message && (
                 <Message
                 messageText={message.messageText}
@@ -119,7 +115,7 @@ export default function BookEdit() {
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label htmlFor="title">Título</label>
+                    <label htmlFor="title" className="block font-medium mb-2">Título</label>
                     <input
                         id="title"
                         type="text"
@@ -132,7 +128,7 @@ export default function BookEdit() {
                 </div>
 
                 <div>
-                    <label htmlFor="author">Autor</label>
+                    <label htmlFor="author" className="block font-medium mb-2">Autor</label>
                     <select
                         id="author"
                         name="author_id"
@@ -151,7 +147,7 @@ export default function BookEdit() {
                 </div>
 
                 <div>
-                <label htmlFor="genre">Género</label>
+                <label htmlFor="genre" className="block font-medium mb-2">Género</label>
                 <select
                     id="genre"
                     name="genre"
@@ -169,7 +165,7 @@ export default function BookEdit() {
                 </div>
 
                 <div>
-                <label htmlFor="publication_date">Fecha de publicación</label>
+                <label htmlFor="publication_date" className="block font-medium mb-2">Fecha de publicación</label>
                 <input
                     id="publication_date"
                     type="date"
@@ -182,7 +178,7 @@ export default function BookEdit() {
                 </div>
 
                 <div>
-                <label htmlFor="description">Descripción</label>
+                <label htmlFor="description" className="block font-medium mb-2">Descripción</label>
                 <textarea
                     id="description"
                     name="description"
@@ -197,7 +193,9 @@ export default function BookEdit() {
                     <button
                     type="submit"
                     disabled={saving}
-                    className="bg-green hover:bg-green text-white px-4 py-2 rounded"
+                    className={`bg-orange text-white px-6 py-2 font-semibold rounded hover:bg-orange-dark ${
+                        saving ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                     >
                     {saving ? "Guardando..." : "Guardar Cambios"}
                     </button>
