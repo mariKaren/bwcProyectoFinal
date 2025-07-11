@@ -3,7 +3,7 @@ import { useAuth } from "../context/useAuth";
 import { useNavigate, useLocation } from "react-router";
 import BookGrid from "../components/BookGrid";
 import type { Book } from "../types/book";
-import api from "../services/api";//la conexion a la api
+import api from "../services/api";
 
 export function Wishlist() {
     const { user, isAuthenticated, loading } = useAuth();
