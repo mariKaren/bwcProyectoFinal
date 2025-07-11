@@ -77,8 +77,9 @@ export default function BookCreate() {
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block font-medium mb-2">Título</label>
+                    <label htmlFor="title" className="block font-medium mb-2">Título</label>
                     <input
+                        id="title"
                         name="title"
                         value={form.title}
                         onChange={handleChange}
@@ -88,9 +89,10 @@ export default function BookCreate() {
                 </div>
 
                 <div>
-                    <label className="block font-medium mb-2">Autor</label>
+                    <label htmlFor="author" className="block font-medium mb-2">Autor</label>
                     <div className="flex gap-2 items-center">
                         <select
+                        id="author"
                         name="author_id"
                         value={form.author_id}
                         onChange={handleChange}
@@ -129,8 +131,9 @@ export default function BookCreate() {
                 </div>
 
                 <div>
-                    <label className="block font-medium mb-2">Género</label>
+                    <label htmlFor="genre" className="block font-medium mb-2">Género</label>
                     <select
+                        id="genre"
                         name="genre"
                         value={form.genre}
                         onChange={handleChange}
@@ -147,8 +150,9 @@ export default function BookCreate() {
                 </div>
 
                 <div>
-                    <label className="block font-medium mb-2">Fecha de publicación</label>
+                    <label htmlFor="publication_date" className="block font-medium mb-2">Fecha de publicación</label>
                     <input
+                        id="publication_date"
                         type="date"
                         name="publication_date"
                         value={form.publication_date}
@@ -161,8 +165,9 @@ export default function BookCreate() {
                 </div>
 
                 <div>
-                <label className="block font-medium mb-2">Descripción</label>
+                <label htmlFor="description" className="block font-medium mb-2">Descripción</label>
                 <textarea
+                    id="description"
                     name="description"
                     value={form.description}
                     onChange={handleChange}

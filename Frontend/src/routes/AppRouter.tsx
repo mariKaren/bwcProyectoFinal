@@ -27,7 +27,7 @@ export default function AppRouter() {
                 {/* Rutas protegidas admin */}
                 <Route path="/admin" element={<AdminRoute />}>
                     <Route index element={<AdminPanel />} />
-                    <Route path="libros/:id/edit" element={<BookEdit />} />
+                    <Route path="libros/:id/editar" element={<BookEdit />} />
                     <Route path="libros/crear" element={<BookCreate />} />
                     <Route path="autores/crear" element={<AuthorCreate />} />
                 </Route>

@@ -48,7 +48,6 @@ export function BookEdit() {
                 ]);
                 const book = bookRes.data.data;
                 const authorsList = authorsRes.data.data;
-
                 setBookData({
                 title: book.title || "",
                 author_id: String(book.author.id) || "",
@@ -120,38 +119,41 @@ export function BookEdit() {
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                <label>Título</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={bookData.title}
-                    onChange={handleChange}
-                    required
-                    className="w-full border p-2 rounded"
-                />
+                    <label htmlFor="title">Título</label>
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        value={bookData.title}
+                        onChange={handleChange}
+                        required
+                        className="w-full border p-2 rounded"
+                    />
                 </div>
 
                 <div>
-                <label>Autor</label>
-                <select
-                    name="author_id"
-                    value={bookData.author_id}
-                    onChange={handleChange}
-                    required
-                    className="w-full border p-2 rounded"
-                >
-                    <option value="">Seleccione un autor</option>
-                    {authors.map((author) => (
-                    <option key={author.id} value={author.id}>
-                        {author.name}
-                    </option>
-                    ))}
-                </select>
+                    <label htmlFor="author">Autor</label>
+                    <select
+                        id="author"
+                        name="author_id"
+                        value={bookData.author_id}
+                        onChange={handleChange}
+                        required
+                        className="w-full border p-2 rounded"
+                    >
+                        <option value="">Seleccione un autor</option>
+                        {authors.map((author) => (
+                        <option key={author.id} value={author.id}>
+                            {author.name}
+                        </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div>
-                <label>Género</label>
+                <label htmlFor="genre">Género</label>
                 <select
+                    id="genre"
                     name="genre"
                     value={bookData.genre}
                     onChange={handleChange}
@@ -167,8 +169,9 @@ export function BookEdit() {
                 </div>
 
                 <div>
-                <label>Fecha de publicación</label>
+                <label htmlFor="publication_date">Fecha de publicación</label>
                 <input
+                    id="publication_date"
                     type="date"
                     name="publication_date"
                     value={bookData.publication_date}
@@ -179,8 +182,9 @@ export function BookEdit() {
                 </div>
 
                 <div>
-                <label>Descripción</label>
+                <label htmlFor="description">Descripción</label>
                 <textarea
+                    id="description"
                     name="description"
                     value={bookData.description}
                     onChange={handleChange}
