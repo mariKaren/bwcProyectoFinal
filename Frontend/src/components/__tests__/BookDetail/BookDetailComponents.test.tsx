@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { BookInfo } from '../BookDetail/BookInfo';
-import { ReviewForm } from '../BookDetail/ReviewForm';
-import { ReviewList } from '../BookDetail/ReviewList';
-import { WishlistButton } from '../BookDetail/WishlistButtons';
+import { BookInfo } from '../../BookDetail/BookInfo';
+import { ReviewForm } from '../../BookDetail/ReviewForm';
+import { ReviewList } from '../../BookDetail/ReviewList';
+import { WishlistButton } from '../../BookDetail/WishlistButtons';
 
 describe('Componentes de BookDetail', () => {
   // Mock de datos para BookInfo

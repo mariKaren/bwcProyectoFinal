@@ -1,17 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act, waitFor } from '@testing-library/react';
-import { useBookDetail } from '../../hooks/useBookDetail';
+import { useBookDetail } from '../../../hooks/useBookDetail';
 import { useParams, useNavigate } from 'react-router';
-import { useAuth } from '../../context/useAuth';
-import api from '../../services/api';
+import { useAuth } from '../../../context/useAuth';
+import api from '../../../services/api';
 
 // Mock de dependencias
-vi.mock('../../services/api');
+vi.mock('../../../services/api');
 vi.mock('react-router', () => ({
     useParams: vi.fn(),
     useNavigate: vi.fn(),
 }));
-vi.mock('../../context/useAuth', () => ({
+vi.mock('../../../context/useAuth', () => ({
     useAuth: vi.fn(),
 }));
 
