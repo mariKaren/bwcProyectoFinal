@@ -1,6 +1,6 @@
 import { render, screen} from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
-import {BookEdit} from "../../../pages/admin/BookEdit";
+import BookEdit from "../../../pages/admin/BookEdit";
 import api from "../../../services/api";
 
 vi.mock("../../../services/api");

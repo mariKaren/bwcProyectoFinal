@@ -1,4 +1,4 @@
-const Contact= () => {
+export default function Contact(){
     return (
         <section className="mt-10">
             <div className="bg-beige max-w-4xl text-brown mx-auto py-12 px-6 sm:px-12 md:px-20 rounded-2xl shadow-md space-y-6">
@@ -19,4 +19,3 @@ const Contact= () => {
     );
 };
 
-export default Contact;

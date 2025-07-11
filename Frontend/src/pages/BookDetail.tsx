@@ -5,7 +5,7 @@ import { ReviewForm } from "../components/BookDetail/ReviewForm";
 import { WishlistButton } from "../components/BookDetail/WishlistButtons";
 import { Message } from "../components/Message";
 
-export function BookDetail() {
+export default function BookDetail() {
     const {
         book,
         reviews,

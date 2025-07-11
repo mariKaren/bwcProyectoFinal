@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router";
 import { describe, test, beforeEach, vi } from "vitest";
-import { Wishlist } from "../../pages/Wishlist";
+import  Wishlist from "../../pages/Wishlist";
 import { useAuth } from "../../context/useAuth";
 import api from "../../services/api";
 

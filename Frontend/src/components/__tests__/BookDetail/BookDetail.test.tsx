@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import { BookDetail } from '../../../pages/BookDetail';
+import BookDetail from '../../../pages/BookDetail';
 import { useBookDetail } from '../../../hooks/useBookDetail';
 
 // Mock del hook useBookDetail

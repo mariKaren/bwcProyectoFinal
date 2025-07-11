@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router";
-import { AdminRoute } from "../../../routes/AdminRoute";
+import AdminRoute from "../../../routes/AdminRoute";
 import { useAuth } from "../../../context/useAuth";
 import { vi } from "vitest";
 

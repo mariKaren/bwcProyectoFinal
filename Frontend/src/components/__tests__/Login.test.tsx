@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { Login } from "../../pages/Login";
+import Login from "../../pages/Login";
 import { useAuth } from "../../context/useAuth";
 import { BrowserRouter } from "react-router";
 import { vi } from "vitest";

@@ -1,6 +1,6 @@
 import { useAuthForm } from "../hooks/useAuthForm";
 
-export function Login() {
+export default function Login() {
     const {
     isLogin,
     setIsLogin,

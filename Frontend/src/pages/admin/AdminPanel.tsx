@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-export function AdminPanel() {
+export default function AdminPanel() {
     return (
         <div className="p-4 space-y-9 text-center">
             <h1 className="text-2xl font-bold text-red">Panel de Administración</h1>

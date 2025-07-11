@@ -10,7 +10,7 @@ type Author = {
     name: string;
 };
 
-export function BookEdit() {
+export default function BookEdit() {
     const { id } = useParams();
     const navigate = useNavigate();
 

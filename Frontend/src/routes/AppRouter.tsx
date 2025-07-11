@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router";
 import Layout from "../layout/Layout";
-import { AdminRoute } from "./AdminRoute"; 
+import AdminRoute from "./AdminRoute"; 
 
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import {Wishlist} from "../pages/Wishlist";
-import {Login} from "../pages/Login";
+import Wishlist from "../pages/Wishlist";
+import Login from "../pages/Login";
 import AdvancedSearch from "../pages/AdvancedSearch.tsx";
-import { BookDetail } from "../pages/BookDetail.tsx";
-import { BookEdit } from "../pages/admin/BookEdit.tsx";
-import {AdminPanel} from "../pages/admin/AdminPanel.tsx";
+import BookDetail from "../pages/BookDetail.tsx";
+import BookEdit from "../pages/admin/BookEdit.tsx";
+import AdminPanel from "../pages/admin/AdminPanel.tsx";
 import BookCreate from "../pages/admin/BookCreate.tsx";
 import AuthorCreate from "../pages/admin/AuthorCreate.tsx";
 

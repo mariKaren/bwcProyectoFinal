@@ -1,7 +1,7 @@
 import { useBookSearch } from "../hooks/useBookSearch";
 import BookGrid from "../components/BookGrid";
 
-const AdvancedSearch = () => {
+export default function AdvancedSearch () {
     const {
         title,
         setTitle,
@@ -86,5 +86,3 @@ const AdvancedSearch = () => {
         </div>
     );
 };
-
-export default AdvancedSearch;

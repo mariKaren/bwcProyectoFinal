@@ -5,7 +5,7 @@ import BookGrid from "../components/BookGrid";
 import type { Book } from "../types/book";
 import api from "../services/api";
 
-export function Wishlist() {
+export default function Wishlist() {
     const { user, isAuthenticated, loading } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();

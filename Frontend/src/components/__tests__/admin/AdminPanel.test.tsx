@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import { AdminPanel } from "../../../pages/admin/AdminPanel";
+import AdminPanel from "../../../pages/admin/AdminPanel";
 
 test("muestra los botones del panel admin", () => {
     render(

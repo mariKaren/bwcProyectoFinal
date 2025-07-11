@@ -1,4 +1,4 @@
-const About = () => {
+export default function About() {
     return (
         <section className="min-h-[80vh] sm:mx-4 flex items-center justify-center">
         <div className="bg-beige max-w-4xl text-brown py-12 px-6 sm:px-12 md:px-20 rounded-2xl shadow-md space-y-6">
@@ -29,4 +29,3 @@ const About = () => {
     
 };
 
-export default About;
