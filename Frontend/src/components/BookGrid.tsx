@@ -35,7 +35,7 @@ const BookGrid = ({ books,isLoading = false }: Props) => {
                 />
                 <div className="p-4">
                     <h3 className="font-semibold text-lg">{book.title}</h3>
-                    <p className="text-gray-600">{book.author.name}</p>
+                    <p className="text-gray-600">{book.author?.name ?? 'Autor desconocido'}</p>
                 </div>
                 </Link>
             ))}
