@@ -87,9 +87,10 @@ export default function AuthorCreate() {
             <form onSubmit={handleSubmit} className="space-y-6">
                 {fields.map((field) => (
                 <div key={field}>
-                    <label className="block font-medium capitalize mb-2">{fieldLabels[field]}</label>
+                    <label htmlFor={field} className="block font-medium capitalize mb-2">{fieldLabels[field]}</label>
                     {field === "description" ? (
                     <textarea
+                        id={field}
                         name={field}
                         value={form[field]}
                         onChange={handleChange}
@@ -99,6 +100,7 @@ export default function AuthorCreate() {
                     />
                     ) : (
                     <input
+                        id={field}
                         type={field === "birth_date" ? "date" : "text"}
                         name={field}
                         value={form[field]}
