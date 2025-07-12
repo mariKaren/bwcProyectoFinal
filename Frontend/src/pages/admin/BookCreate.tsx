@@ -15,8 +15,8 @@ export default function BookCreate() {
         description: "",
     });
     const [authors, setAuthors] = useState<Author[]>([]);
-    const [errors, setErrors] = useState<{ [key: string]: string }>({});
-    const [error, setError] = useState<string | null>(null);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});//errores relacionados con campos de este formulario
+    const [error, setError] = useState<string | null>(null);//error relacionado con la carga de autores y con la creacion del libro
     const [isLoadingAuthors, setIsLoadingAuthors] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -65,7 +65,7 @@ export default function BookCreate() {
             if (error.response?.status === 422) {
             setErrors(error.response.data.errors);
             } else {
-            setError("Error al crear libro");
+            setError("Error al crear el libro");
             toast.error("Ocurrió un error. Inténtelo de nuevo.")
             }
         }finally{

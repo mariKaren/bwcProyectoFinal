@@ -28,6 +28,11 @@ describe("BookEdit", () => {
       return Promise.reject(new Error(`No encontrado: ${url}`));
     });
   });
+  
+  afterEach(() => {
+    vi.clearAllMocks(); 
+  });
+
 
   it("carga y muestra los datos del libro", async () => {
     render(
