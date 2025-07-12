@@ -3,7 +3,6 @@ import { BookInfo } from "../components/BookDetail/BookInfo";
 import { ReviewList } from "../components/BookDetail/ReviewList";
 import { ReviewForm } from "../components/BookDetail/ReviewForm";
 import { WishlistButton } from "../components/BookDetail/WishlistButtons";
-import { Message } from "../components/Message";
 
 export default function BookDetail() {
     const {
@@ -19,8 +18,8 @@ export default function BookDetail() {
         isAuthenticated,
         isAdmin,
         user,
-        message,
-        setMessage,
+        errors,
+        formErrors,
         setShowReviewForm,
         setReviewDescription,
         setReviewRating,
@@ -39,13 +38,6 @@ export default function BookDetail() {
 
     return (
         <div className="pt-6">
-            {message && (
-                <Message
-                messageText={message.messageText}
-                type={message.type}
-                onClose={() => setMessage(null)}
-                />
-            )}
             <BookInfo book={book} />
 
             <ReviewList
@@ -56,8 +48,14 @@ export default function BookDetail() {
                 handleDeleteReview={handleDeleteReview}
             />
             <div className="mt-6">
+                {errors.reviews && (
+                    <p className="text-red-500 bg-beige text-sm mt-2">{errors.reviews}</p>
+                )}
                 {isUser && (
                 <>
+                    {errors.wishlist && (
+                    <p className="text-red-500 bg-beige text-sm mt-2">{errors.wishlist}</p>
+                    )}
                     <WishlistButton
                     isInWishlist={isInWishlist}
                     handleAddToWishlist={handleAddToWishlist}
@@ -78,6 +76,7 @@ export default function BookDetail() {
                         setReviewDescription={setReviewDescription}
                         setReviewRating={setReviewRating}
                         handleSubmitReview={handleSubmitReview}
+                        formErrors={formErrors}
                         />
                     </>
                     ) : (

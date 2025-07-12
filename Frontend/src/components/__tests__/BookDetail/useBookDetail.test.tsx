@@ -90,10 +90,6 @@ describe('useBookDetail', () => {
         });
 
         expect(result.current.isInWishlist).toBe(true);
-        expect(result.current.message).toEqual({
-        messageText: 'Libro agregado a tu wishlist',
-        type: 'success',
-        });
     });
 
     it('envía una reseña correctamente', async () => {
@@ -138,10 +134,6 @@ describe('useBookDetail', () => {
 
         expect(result.current.reviews).toContainEqual(newReview);
         expect(result.current.hasUserReviewed).toBe(true);
-        expect(result.current.message).toEqual({
-        messageText: '¡Gracias por tu reseña!',
-        type: 'success',
-        });
     });
 
 });

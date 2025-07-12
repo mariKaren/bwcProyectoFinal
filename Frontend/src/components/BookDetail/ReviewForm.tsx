@@ -5,6 +5,7 @@ interface ReviewFormProps {
     setReviewDescription: (value: string) => void;
     setReviewRating: (value: number) => void;
     handleSubmitReview: () => void;
+    formErrors?: { [key: string]: string };
 }
 
 export const ReviewForm = ({
@@ -14,6 +15,7 @@ export const ReviewForm = ({
     setReviewDescription,
     setReviewRating,
     handleSubmitReview,
+    formErrors
     }: ReviewFormProps) => {
     if (!showReviewForm) return null;
 
@@ -27,6 +29,9 @@ export const ReviewForm = ({
                 className="w-full p-2 border rounded mb-2 resize-none"
                 rows={4}
             />
+            {formErrors?.reviewDescription && (
+                <p className="text-red-500 text-sm mb-2">{formErrors.reviewDescription}</p>
+            )}
             <div className="mb-4">
                 <label className="block text-sm font-medium text-gray mb-3">
                 Calificación (1 a 5)
@@ -42,6 +47,9 @@ export const ReviewForm = ({
                     </option>
                 ))}
                 </select>
+                {formErrors?.reviewRating && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.reviewRating}</p>
+                )}
             </div>
             <div className="text-center">
                 <button

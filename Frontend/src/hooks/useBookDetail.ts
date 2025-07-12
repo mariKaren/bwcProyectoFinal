@@ -4,7 +4,7 @@ import api from "../services/api";
 import { useAuth } from "../context/useAuth";
 import type { Book } from "../types/book";
 import type { Review } from "../types/review";
-import type { MessageState } from "../types/message";
+import { toast } from 'react-toastify';
 
 export const useBookDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -19,20 +19,17 @@ export const useBookDetail = () => {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [reviewDescription, setReviewDescription] = useState("");
     const [reviewRating, setReviewRating] = useState(5);
-    const [message, setMessage] = useState<MessageState | null>(null);
-
-    // Función para mostrar los mensajes
-    const showMessage = (messageText: string,type:MessageState['type'] ) => {
-        setMessage({ messageText, type });
-        setTimeout(() => setMessage(null), 3000);
-    };
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         if (!id) {
-            showMessage("ID de libro inválido", "error");
+            toast.error("ID de libro inválido");
             navigate("/libros/busqueda");
             return;
         }
+        setErrors({});
+        setIsLoading(true);
         // Fetch del libro
         api
         .get(`/books/${id}`)
@@ -53,6 +50,7 @@ export const useBookDetail = () => {
             })
             .catch(() => {
                 setIsLoading(false);
+                toast.error("Libro no encontrado");
                 setTimeout(() => navigate(`/libros/busqueda`), 2000);
             }
         );
@@ -64,24 +62,35 @@ export const useBookDetail = () => {
             api
                 .get(`/books/${id}/reviews`)
                 .then((res) => {
-                const reviewsData = res.data.data;
-                setReviews(reviewsData);
-                if (isAuthenticated && user) {
-                    const alreadyReviewed = reviewsData.some((r: Review) => r.user_id === user.id);
-                    setHasUserReviewed(alreadyReviewed);
-                }
+                    const reviewsData = res.data.data;
+                    setReviews(reviewsData);
+                    if (user) {
+                        const alreadyReviewed = reviewsData.some((r: Review) => r.user_id === user.id);
+                        setHasUserReviewed(alreadyReviewed);
+                    }
                 })
-                .catch(() => showMessage("Error al cargar reseñas", "error"));
+                .catch(() => {
+                    setErrors((prev) => ({
+                        ...prev,
+                        reviews: "Error al cargar reseñas",
+                }));})
 
             // Wishlist
-            api
-                .get(`/wishlist`)
+            if (user) {
+                api.get(`/wishlist`)
                 .then((res) => {
-                const found = res.data.data.some((item: any) => item.book_id == id);
-                setIsInWishlist(found);
+                    const found = res.data.data.some((item: any) => item.book_id == id);
+                    setIsInWishlist(found);
                 })
-                .catch(() => showMessage("Error al verificar wishlist", "error"));
-        }
+                .catch(() => {
+                    setErrors((prev) => ({
+                        ...prev,
+                        wishlist: "Error al verificar wishlist",
+                    }));
+                });
+            }
+            
+        };
     }, [id, isAuthenticated, user]);
 
     //Funcion para eliminar reseñas
@@ -90,9 +99,9 @@ export const useBookDetail = () => {
             await api.delete(`/reviews/${reviewId}`);
             setReviews((prevReviews) => prevReviews.filter((r) => r.id !== reviewId));
             setHasUserReviewed(false);
-            showMessage("Reseña eliminada correctamente", "success");
+            toast.success("¡Reseña eliminada correctamente!")
         } catch {
-            showMessage("Error al eliminar la reseña", "error");
+            toast.error("Error al eliminar la reseña. Inténtelo de nuevo.")
         }
     }
 
@@ -101,9 +110,9 @@ export const useBookDetail = () => {
         try {
             await api.post("/wishlist", { book_id: book?.id });
             setIsInWishlist(true);
-            showMessage("Libro agregado a tu wishlist", "success");
+            toast.success("¡Libro agregado a tu wishlist!")
         } catch {
-            showMessage("Error al agregar a wishlist", "error");
+            toast.error("Error al agregar a wishlist")
         }
     };
 
@@ -111,19 +120,22 @@ export const useBookDetail = () => {
         try {
             await api.delete(`/wishlist/${id}`);
             setIsInWishlist(false);
-            showMessage("Libro eliminado de wishlist", "success");
+            toast.success("¡Libro eliminado de wishlist!")
         } catch {
-            showMessage("Error al eliminar de wishlist", "error");
+            toast.error("Error al eliminar de wishlist")
         }
     };
 
     const handleSubmitReview = async () => {
+        const newErrors: { [key: string]: string } = {};
         if (!reviewDescription.trim()) {
-            showMessage("La reseña es obligatoria", "error");
-            return;
+            newErrors.reviewDescription = "La reseña es obligatoria.";
         }
         if (reviewRating < 1 || reviewRating > 5) {
-            showMessage("Selecciona un rating válido (1-5)", "error");
+            newErrors.reviewRating = "Selecciona un rating válido (1-5).";
+        }
+        if (Object.keys(newErrors).length > 0) {
+            setFormErrors(newErrors);
             return;
         }
         try {
@@ -137,19 +149,20 @@ export const useBookDetail = () => {
             setShowReviewForm(false);
             setReviewDescription("");
             setReviewRating(5);
-            showMessage("¡Gracias por tu reseña!", "success");
+            setFormErrors({});
+            toast.success("¡Gracias por tu reseña!")
         } catch {
-            showMessage("Error al enviar la reseña", "error");
+            toast.error("Error al enviar la reseña.Inténtelo de nuevo")
         }
     };
 
     const handleDeleteBook = async () => {
         try {
             await api.delete(`/books/${book?.id}`);
-            showMessage("Libro eliminado exitosamente", "success");
+            toast.success("¡Libro eliminado correctamente!")
             setTimeout(() => navigate(`/libros/busqueda`), 1000);
         } catch {
-            showMessage("Error al eliminar el libro", "error");
+            toast.error("Error al eliminar el libro.Inténtelo de nuevo")
         }
     };
 
@@ -166,8 +179,8 @@ export const useBookDetail = () => {
         isAdmin,
         user,
         loading,
-        message,
-        setMessage,
+        errors,
+        formErrors,
         setShowReviewForm,
         setReviewDescription,
         setReviewRating,
