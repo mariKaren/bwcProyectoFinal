@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import api from "../../services/api";
 import type { Author } from "../../types/author";
 import { genres } from "../../types/genres";
+import { toast } from 'react-toastify';
 
 export default function BookCreate() {
     const navigate = useNavigate();
@@ -58,13 +59,14 @@ export default function BookCreate() {
 
         try {
             await api.post("/books", form);
-            alert("Libro creado correctamente");
+            toast.success("¡Libro creado correctamente!")
             navigate("/admin");
         } catch (error:any) {
             if (error.response?.status === 422) {
             setErrors(error.response.data.errors);
             } else {
             setError("Error al crear libro");
+            toast.error("Ocurrió un error. Inténtelo de nuevo.")
             }
         }finally{
             setIsSubmitting(false);
@@ -74,7 +76,7 @@ export default function BookCreate() {
     return (
         <div className="max-w-2xl mx-auto p-4">
             <h2 className="text-xl sm:text-2xl font-semibold text-red text-center mb-4">Crear Libro</h2>
-            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            {error && <p className="text-red-500 text-center bg-beige text-md mb-4">{error}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <label htmlFor="title" className="block font-medium mb-2">Título</label>
@@ -126,8 +128,8 @@ export default function BookCreate() {
                             >
                             {isLoadingAuthors ? "Cargando..." : "Recargar autores"}
                         </button>
-                </div>
-                {errors.author_id && <p className="text-red-500 text-sm mb-4">{errors.author_id}</p>}
+                    </div>
+                    {errors.author_id && <p className="text-red-500 text-sm mb-4">{errors.author_id}</p>}
                 </div>
 
                 <div>
@@ -165,15 +167,15 @@ export default function BookCreate() {
                 </div>
 
                 <div>
-                <label htmlFor="description" className="block font-medium mb-2">Descripción</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={form.description}
-                    onChange={handleChange}
-                    className="w-full border rounded px-3 py-2"
-                    rows={4}
-                />
+                    <label htmlFor="description" className="block font-medium mb-2">Descripción</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={form.description}
+                        onChange={handleChange}
+                        className="w-full border rounded px-3 py-2"
+                        rows={4}
+                    />
                 </div>
 
                 <div className="text-center">

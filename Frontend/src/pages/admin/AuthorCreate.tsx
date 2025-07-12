@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import api from "../../services/api";
 import type { AuthorForm } from "../../types/author";
+import { toast } from 'react-toastify';
 
 
 type FormErrors = {
@@ -60,17 +61,16 @@ export default function AuthorCreate() {
                     birth_city: "",
                     description: "",
             });
-            if (window.confirm("Autor creado correctamente. ¿Deseas cerrar esta pestaña?")) {
-                window.close();
-            } else {
-                navigate("/admin");
-            }
+            toast.success("¡Autor creado correctamente!")
+            navigate("/admin");
         } catch (error: any) {
             if (error.response?.status === 422) {
                 setErrors(error.response.data.errors);
             } else {
                 setError("Error al crear el autor");
+                toast.error("Ocurrió un error. Inténtelo de nuevo.")
             }
+            
         } finally {
         setIsSubmitting(false);
         }
@@ -82,7 +82,7 @@ export default function AuthorCreate() {
         <div className="max-w-xl mx-auto p-4">
             <h2 className="text-xl sm:text-2xl font-semibold text-red text-center mb-4">Crear Autor</h2>
 
-            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            {error && <p className="text-red-500 text-center bg-beige text-md mb-4">{error}</p>}
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {fields.map((field) => (
