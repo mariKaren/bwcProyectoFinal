@@ -29,7 +29,7 @@ export default function Wishlist() {
             id: item.book.id,
             title: item.book.title,
             author: item.book.author.name,
-            cover: item.book.cover||"/imgDefecto.png",
+            cover: item.book.cover,
             }));
             setBooks(booksData);
             setIsLoading(false);
