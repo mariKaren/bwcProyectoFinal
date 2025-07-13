@@ -69,7 +69,7 @@ Cada módulo tiene su propio archivo README.md con instrucciones detalladas.
 Seguí los pasos correspondientes según la carpeta.
 
 ---
-### Manejo de archivos e imágenes en Laravel
+## Manejo de archivos e imágenes en Laravel
 
 Las imágenes (como portadas de libros) se almacenan en `storage/app/public`, pero para que sean accesibles desde el navegador, es necesario crear un enlace simbólico con:
 
