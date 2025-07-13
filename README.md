@@ -30,7 +30,7 @@ BookWormsClub/
 │     ├── app/
 │     └── README.md
 ├── README.md # Este archivo (general)
-/```
+\```
 ---
 
 ## Tecnologías Utilizadas
