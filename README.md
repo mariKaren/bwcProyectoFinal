@@ -75,5 +75,5 @@ Las imágenes (como portadas de libros) se almacenan en `storage/app/public`, pe
 
 ```bash
 php artisan storage:link
-
+```
 Este paso es obligatorio para que las imágenes se vean correctamente en el navegador.
