@@ -1,6 +1,8 @@
-# Virtual Library API
+# 📚 Virtual Library API
 
 API RESTful desarrollada con **Laravel**, que permite la gestión de una biblioteca virtual. Soporta operaciones CRUD sobre libros, autores,listas de deseos y reseñas literarias.
+
+---
 
 ## Funcionalidades Principales
 
@@ -11,6 +13,8 @@ API RESTful desarrollada con **Laravel**, que permite la gestión de una bibliot
 - Wishlist personal por usuario.
 - Control de acceso por roles (admin/user).
 
+---
+
 ## Tecnologías usadas
 
 - PHP 8.x  
@@ -19,12 +23,16 @@ API RESTful desarrollada con **Laravel**, que permite la gestión de una bibliot
 - Laravel 
 - Sanctum 
 
+---
+
 ## Test
 
 Se incluyen tests funcionales (Feature) desarrollados con PHPUnit, ubicados en tests/Feature.
 - Ejecutar los tests con:
 
     php artisan test
+
+---
 
 ##  Instalación Rápida
 
