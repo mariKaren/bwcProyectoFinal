@@ -32,7 +32,6 @@ describe("BookCreate", () => {
         expect(screen.getByText("Autor 1")).toBeInTheDocument();
         });
 
-        // Interacciones del usuario
         await user.clear(screen.getByLabelText(/título/i));
         await user.type(screen.getByLabelText(/título/i), "Cien Años de Soledad");
         await user.selectOptions(screen.getByLabelText(/autor/i), "1");
@@ -40,21 +39,31 @@ describe("BookCreate", () => {
         await user.clear(screen.getByLabelText(/fecha de publicación/i));
         await user.type(screen.getByLabelText(/fecha de publicación/i), "1967-05-30");
 
-        // Simular clic en el botón de envío
-        await user.click(screen.getByRole("button", { name: /crear libro/i }));
+         // Simular carga de archivo
+        const file = new File(["dummy content"], "portada.jpg", { type: "image/jpeg" });
+        const fileInput = screen.getByLabelText(/portada/i);
+        await user.upload(fileInput, file);
 
-        // Verificar que se hizo el POST con los datos correctos
-        await waitFor(() => {
-        expect(api.post).toHaveBeenCalledWith(
-            "/books",
-            expect.objectContaining({
-            title: "Cien Años de Soledad",
-            author_id: "1", // author_id se envía como string desde el formulario
-            genre: "ficcion",
-            publication_date: "1967-05-30",
-            description: "", // description es opcional y está vacío
-            })
-        );
+         // Simular clic en el botón de envío
+        await user.click(screen.getByRole("button", { name: /crear libro/i }));
+        
+        // Extraer el FormData que se usó
+        const formDataArg = vi.mocked(api.post).mock.calls[0][1] as FormData;
+
+        // Verificar que sea un FormData
+        expect(formDataArg).toBeInstanceOf(FormData);
+
+        // Validar contenido del FormData
+        const entries: Record<string, any> = {};
+        formDataArg.forEach((value, key) => {
+        entries[key] = value;
         });
+
+        expect(entries.title).toBe("Cien Años de Soledad");
+        expect(entries.author_id).toBe("1");
+        expect(entries.genre).toBe("ficcion");
+        expect(entries.publication_date).toBe("1967-05-30");
+        expect(entries.description).toBe(""); 
+        expect(entries.cover).toBe(file); 
     });
 });

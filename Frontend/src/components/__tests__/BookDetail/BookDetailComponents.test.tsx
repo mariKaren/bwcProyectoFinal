@@ -12,7 +12,7 @@ describe('Componentes de BookDetail', () => {
     title: 'Test Book',
     author: { id: 1, name: 'Author Name' },
     author_id: 1,
-    cover: '/cover.jpg',
+    cover: 'cover.jpg',
     genre: 'Fiction',
     description: 'A test book description',
     publication_date: '2023-01-01',
@@ -71,7 +71,7 @@ describe('Componentes de BookDetail', () => {
       expect(screen.getByText('Fiction')).toBeInTheDocument();
       expect(screen.getByText('2023-01-01')).toBeInTheDocument();
       expect(screen.getByText('A test book description')).toBeInTheDocument();
-      expect(screen.getByRole('img')).toHaveAttribute('src', '/cover.jpg');
+      expect(screen.getByRole('img')).toHaveAttribute('src', 'http://localhost:8000/storage/cover.jpg');
     });
 
     it('usa la portada por defecto cuando no hay portada', () => {

@@ -18,6 +18,7 @@ describe("BookEdit", () => {
               genre: "ficcion",
               publication_date: "01/01/2000",
               description: "desc",
+              cover: "portada/original.jpg",
             },
           },
         });
@@ -34,7 +35,7 @@ describe("BookEdit", () => {
   });
 
 
-  it("carga y muestra los datos del libro", async () => {
+  it("carga y muestra los datos del libro,incluyendo portada", async () => {
     render(
       <MemoryRouter initialEntries={["/libros/1/editar"]}>
         <Routes>
@@ -61,6 +62,9 @@ describe("BookEdit", () => {
 
     const descriptionTextarea = screen.getByLabelText(/descripción/i);
     expect(descriptionTextarea).toHaveValue("desc");
+
+    const image = await screen.findByAltText(/portada actual/i);
+    expect(image).toHaveAttribute("src", expect.stringContaining("portada/original.jpg"));
 
   });
 });
