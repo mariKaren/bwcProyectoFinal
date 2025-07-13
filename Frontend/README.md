@@ -83,7 +83,7 @@ php artisan storage:link
 Este paso es obligatorio para que las imágenes se vean correctamente en el navegador.
 
 ---
-### Usuarios y Roles
+## Usuarios y Roles
 
 En esta aplicación existen dos tipos de roles:
 
@@ -92,7 +92,7 @@ En esta aplicación existen dos tipos de roles:
 
 > Solo los usuarios con rol `user` pueden registrarse a través del formulario de registro.
 
-#### Usuario administrador precreado
+### Usuario administrador precreado
 
 Para fines de prueba, el proyecto ya incluye un usuario administrador:
 
