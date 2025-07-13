@@ -70,7 +70,7 @@ src
 ├── layout          # Layout principal
 ├── types           # Tipado de entidades (Book, Review, etc.)
 └── routes          # App router y protección de rutas admin
-´´´
+```
 
 ---
 ## Manejo de archivos e imágenes en Laravel
