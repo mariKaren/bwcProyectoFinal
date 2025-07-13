@@ -4,7 +4,7 @@ Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los us
 
 ---
 
-## ✨ Funcionalidades principales
+## Funcionalidades principales
 
 - Ver el listado de libros disponibles.
 - Ver los detalles de un libro.
@@ -19,7 +19,7 @@ Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los us
 
 ---
 
-## 🛠 Tecnologías usadas
+## Tecnologías usadas
 
 - **React** (con Vite)
 - **TypeScript**
@@ -30,7 +30,7 @@ Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los us
 
 ---
 
-## 🚀 Pasos para instalar
+## Pasos para instalar
 
 1. Clonar el repositorio:
 
@@ -40,25 +40,25 @@ Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los us
 
 2. Instalar las dependencias:
 
-npm install
+  npm install
 
 3. Ejecutar el proyecto en modo desarrollo:
 
-npm run dev
+  npm run dev
 
 ## Test
 Este proyecto usa Vitest para pruebas.
 
 - Ejecutar los tests con:
 
-npm run test
+  npm run test
 
 ## Estrctura del proyecto
-
-📦 src
-├──assets           #Imagenes
+```text
+src
+├──assets           # Imagenes
 ├── components      # Componentes reutilizables
-      └──__tests__    # Tests realizados con Vitests
+      └──__tests__  # Tests realizados con Vitests
 ├── pages           # Vistas principales (Home, Wishlist, Admin)
 ├── hooks           # Custom hooks como useBookDetail
 ├── services        # Configuración de llamadas a la API
