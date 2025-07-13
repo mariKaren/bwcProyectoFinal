@@ -61,3 +61,12 @@ Se incluyen tests funcionales (Feature) desarrollados con PHPUnit, ubicados en t
 
     php artisan serve
 
+---
+## Manejo de archivos e imágenes en Laravel
+
+Las imágenes (como portadas de libros) se almacenan en `storage/app/public`, pero para que sean accesibles desde el navegador, es necesario crear un enlace simbólico con:
+
+```bash
+php artisan storage:link
+```
+Este paso es obligatorio para que las imágenes se vean correctamente en el navegador.
