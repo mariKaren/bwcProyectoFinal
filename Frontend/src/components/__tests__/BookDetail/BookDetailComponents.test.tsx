@@ -77,7 +77,7 @@ describe('Componentes de BookDetail', () => {
     it('usa la portada por defecto cuando no hay portada', () => {
       const bookWithoutCover = { ...mockBook, cover: undefined };
       render(<BookInfo book={bookWithoutCover} />);
-      expect(screen.getByRole('img')).toHaveAttribute('src', '/src/assets/portada.jpg');
+      expect(screen.getByRole('img')).toHaveAttribute('src', '/imgDefecto.png');
     });
   });
 

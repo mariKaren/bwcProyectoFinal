@@ -19,6 +19,7 @@ export default function BookCreate() {
     const [error, setError] = useState<string | null>(null);//error relacionado con la carga de autores y con la creacion del libro
     const [isLoadingAuthors, setIsLoadingAuthors] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [coverFile, setCoverFile] = useState<File | null>(null);
 
     const fetchAuthors = async () => {
         setIsLoadingAuthors(true);
@@ -59,8 +60,14 @@ export default function BookCreate() {
             return;
         }
 
+        const formData = new FormData();
+        Object.entries(form).forEach(([key, value]) => formData.append(key, value));
+        if (coverFile) formData.append('cover', coverFile);
+
         try {
-            await api.post("/books", form);
+            await api.post("/books", formData,{
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
             toast.success("¡Libro creado correctamente!")
             navigate("/admin");
         } catch (error:any) {
@@ -178,6 +185,17 @@ export default function BookCreate() {
                         className="w-full border rounded px-3 py-2"
                         rows={4}
                     />
+                </div>
+                <div>
+                    <label htmlFor="cover" className="block font-medium mb-2">Portada</label>
+                    <input
+                        type="file"
+                        id="cover"
+                        accept="image/*"
+                        onChange={(e) => setCoverFile(e.target.files?.[0] || null)}
+                        className="w-full border rounded px-3 py-2"
+                    />
+                    {errors.cover && <p className="text-red-500 text-sm mb-4">{errors.cover}</p>}
                 </div>
 
                 <div className="text-center">

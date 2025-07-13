@@ -22,6 +22,9 @@ export default function BookEdit() {
     const [saving, setSaving] = useState(false);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [error, setError] = useState<string | null>(null);
+    const [coverFile, setCoverFile] = useState<File | null>(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [currentCover, setCurrentCover] = useState<string | null>(null);
 
     function formatDate(dateStr: string): string {
     // Esperamos el formato "DD/MM/YYYY". El backend me lo devuelve en ese formato, pero para que el formulario lo incluya en sus datos es necesario transformar la fecha
@@ -45,7 +48,8 @@ export default function BookEdit() {
                 publication_date: formatDate(book.publication_date) || "",
                 description: book.description || "",
                 });
-
+                console.log(book.cover)
+                setCurrentCover(book.cover ? `http://localhost:8000/storage/${book.cover}` : null); 
                 setAuthors(authorsList);
                 setErrors({});
             } catch {
@@ -67,6 +71,16 @@ export default function BookEdit() {
         }));
     };
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0] || null;
+        setCoverFile(file);
+        if (file) {
+            setPreviewUrl(URL.createObjectURL(file));
+        } else {
+            setPreviewUrl(null);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
@@ -86,13 +100,26 @@ export default function BookEdit() {
             return;
         }
 
-        setSaving(true);
+        const formData = new FormData();
+        for (const key in bookData) {
+            if (bookData[key as keyof typeof bookData]) {
+                formData.append(key, bookData[key as keyof typeof bookData]);
+            }
+        }
+        if (coverFile) {
+            formData.append("cover", coverFile);
+        }
 
         try {
-            await api.put(`/books/${id}`, bookData);
+            await api.post(`/books/${id}?_method=PUT`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
             toast.success("¡Libro actualizado correctamente!")
             setTimeout(() => navigate(`/libros/${id}`), 1000);
-        } catch (error) {
+        } catch (error:any) {
+             console.error(error.response?.data); 
             setError("Error al actualizar el libro");
             toast.error("Ocurrió un error. Inténtelo de nuevo.")
         } finally {
@@ -185,6 +212,32 @@ export default function BookEdit() {
                         onChange={handleChange}
                         className="w-full border p-2 rounded"
                         rows={4}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="cover" className="block font-medium mb-2">Portada</label>
+                    
+                    {currentCover && !previewUrl && (
+                        <div className="mb-2">
+                            <p className="text-sm text-gray-600">Portada actual:</p>
+                            <img src={currentCover} alt="Portada actual" className="h-32 object-cover border rounded" />
+                        </div>
+                    )}
+
+                    {previewUrl && (
+                        <div className="mb-2">
+                            <p className="text-sm text-gray-600">Nueva portada:</p>
+                            <img src={previewUrl} alt="Vista previa" className="h-32 object-cover border rounded" />
+                        </div>
+                    )}
+
+                    <input
+                        type="file"
+                        id="cover"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="w-full border p-2 rounded"
                     />
                 </div>
                 

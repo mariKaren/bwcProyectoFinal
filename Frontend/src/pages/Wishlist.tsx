@@ -29,7 +29,7 @@ export default function Wishlist() {
             id: item.book.id,
             title: item.book.title,
             author: item.book.author.name,
-            cover: item.book.cover||"/src/assets/portada.jpg",
+            cover: item.book.cover||"/imgDefecto.png",
             }));
             setBooks(booksData);
             setIsLoading(false);

@@ -4,8 +4,8 @@ export function BookInfo({ book }: { book: Book }) {
     return (
         <div className="flex flex-col sm:flex-row gap-9 items-center rounded-xl p-6 bg-beige shadow-sm">
             <img
-                src={book.cover || "/src/assets/portada.jpg"}
-                alt={book.title}
+                src={book.cover? `http://localhost:8000/storage/${book.cover}`: "/imgDefecto.png"}
+                alt={`Portada de ${book.title}`}
                 className="w-60 min-h-[11rem] h-auto rounded-lg"
             />
             <div className="flex-1">

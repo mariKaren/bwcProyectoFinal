@@ -29,7 +29,7 @@ const BookGrid = ({ books,isLoading = false }: Props) => {
                 className="bg-white rounded shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                 <img
-                    src={book.cover || "/src/assets/portada.jpg"}
+                    src={book.cover? `http://localhost:8000/storage/${book.cover}`: "/imgDefecto.png"}
                     alt={`Portada de ${book.title}`}
                     className="w-full h-48 object-cover"
                 />

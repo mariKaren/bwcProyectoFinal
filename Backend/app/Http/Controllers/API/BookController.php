@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -49,6 +50,7 @@ class BookController extends Controller
             'genre' => 'nullable|string|max:255',
             'publication_date' => 'required|date',
             'description' => 'nullable|string|max:2000',
+            'cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -58,7 +60,14 @@ class BookController extends Controller
             ], 422);
         }
 
-        $book = Book::create($request->only(['title', 'author_id', 'genre', 'publication_date', 'description']));
+        /* $book = Book::create($request->only(['title', 'author_id', 'genre', 'publication_date', 'description'])); */
+        $data = $request->only(['title', 'author_id', 'genre', 'publication_date', 'description']);
+        if ($request->hasFile('cover')) {
+            $path = $request->file('cover')->store('covers', 'public');
+            $data['cover'] = $path;
+        }
+
+        $book = Book::create($data);
         return response()->json([
             'status' => 'success',
             'message' => 'Book created successfully',
@@ -92,24 +101,13 @@ class BookController extends Controller
             ], 404);
         }
 
-        // Filtrar solo los campos válidos
-        $validFields = $book->getFillable();
-        $inputFields = array_keys($request->all());
-        $validInput = array_intersect($inputFields, $validFields);
-
-        if (empty($validInput)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'No valid fields provided for update',
-            ], 422);
-        }
-
-        $validator = Validator::make($request->only($validInput), [
-            'title' => 'sometimes|required|string|max:255',
-            'author_id' => 'sometimes|required|exists:authors,id',
-            'genre' => 'sometimes|nullable|string|max:255',
-            'publication_date' => 'sometimes|required|date',
-            'description' => 'sometimes|nullable|string|max:2000',
+        $validator = Validator::make($request->all(), [
+        'title' => 'sometimes|required|string|max:255',
+        'author_id' => 'sometimes|required|exists:authors,id',
+        'genre' => 'sometimes|nullable|string|max:255',
+        'publication_date' => 'sometimes|required|date',
+        'description' => 'sometimes|nullable|string|max:2000',
+        'cover' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -119,8 +117,21 @@ class BookController extends Controller
             ], 422);
         }
 
-        // Actualizar el libro con los campos validados
-        $book->update($request->only($validInput));
+        $data = $request->only(['title', 'author_id', 'genre', 'publication_date', 'description']);
+
+        // Si se sube una nueva portada
+        if ($request->hasFile('cover')) {
+            // Borra la portada anterior si existe
+            if ($book->cover && Storage::disk('public')->exists($book->cover)) {
+                Storage::disk('public')->delete($book->cover);
+            }
+
+            // Guarda la nueva portada
+            $path = $request->file('cover')->store('covers', 'public');
+            $data['cover'] = $path;
+        }
+
+        $book->update($data);
 
         return response()->json([
             'status' => 'success',

@@ -40,7 +40,7 @@ export const useBookDetail = () => {
                     title: raw.title,
                     author: raw.author,
                     author_id:raw.author_id,
-                    cover: raw.cover || "/src/assets/portada.jpg",
+                    cover: raw.cover,
                     genre: raw.genre,
                     description: raw.description,
                     publication_date: raw.publication_date,
