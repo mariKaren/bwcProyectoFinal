@@ -46,9 +46,11 @@ export default function BookCreate() {
         setIsSubmitting(true);
         // Validación en el frontend
         const newErrors: { [key: string]: string } = {};
+        const today = new Date().toISOString().split("T")[0];
         if (!form.title) newErrors.title = "El título es obligatorio";
         if (!form.author_id) newErrors.author_id = "Debes seleccionar un autor";
         if (!form.publication_date) newErrors.publication_date = "La fecha de publicación es obligatoria";
+        if (form.publication_date > today) newErrors.publication_date="La fecha no puede ser futura";
         if (!form.genre) newErrors.genre = "Debes seleccionar un género";
 
         if (Object.keys(newErrors).length > 0) {

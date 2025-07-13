@@ -73,9 +73,11 @@ export default function BookEdit() {
         setErrors({});
         // Validaciones
         const newErrors: { [key: string]: string } = {};
+        const today = new Date().toISOString().split("T")[0];
         if (!bookData.title.trim()) newErrors.title="El título es obligatorio";
         if (!bookData.author_id) newErrors.author_id= "Debes seleccionar un autor";
         if (!bookData.publication_date) newErrors.publication_date = "La fecha de publicación es obligatoria";
+         if (bookData.publication_date > today) newErrors.publication_date="La fecha no puede ser futura";
         if (!bookData.genre) newErrors.genre = "Debes seleccionar un género";
 
         if (Object.keys(newErrors).length > 0) {
@@ -188,6 +190,13 @@ export default function BookEdit() {
                 
                 <div className="flex flex-wrap justify-between gap-4">
                     <button
+                        type="button"
+                        onClick={() => navigate(`/libros/${id}`)}
+                        className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                    >
+                        Cancelar
+                    </button>
+                    <button
                     type="submit"
                     disabled={saving}
                     className={`bg-orange text-white px-6 py-2 font-semibold rounded hover:bg-orange-dark ${
@@ -195,13 +204,6 @@ export default function BookEdit() {
                     }`}
                     >
                     {saving ? "Guardando..." : "Guardar Cambios"}
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => navigate(`/libros/${id}`)}
-                        className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
-                    >
-                        Cancelar
                     </button>
                 </div>
                 

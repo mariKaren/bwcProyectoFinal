@@ -45,7 +45,13 @@ export default function AuthorCreate() {
         // Validación en el frontend
         const newErrors: FormErrors = {};
         if (!form.name) newErrors.name = "El nombre es obligatorio";
+        const today = new Date().toISOString().split("T")[0]; 
 
+        if (form.birth_date ) {
+            if(form.birth_date>today){
+                newErrors.birth_date="La fecha no puede ser futura"
+            }
+        }
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
