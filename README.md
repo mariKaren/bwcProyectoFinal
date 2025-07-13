@@ -57,6 +57,7 @@ BookWormsClub/
 
 ```bash
 git clone https://github.com/tu-usuario/book-worms-club.git
+```
 
 ### 2. Configurar el Frontend y el Backend
 Cada módulo tiene su propio archivo README.md con instrucciones detalladas.
