@@ -1,27 +1,38 @@
 # 📚 Virtual Library API
 
-API RESTful desarrollada con **Laravel**, que permite la gestión de una biblioteca virtual. Soporta operaciones CRUD sobre libros, autores y reseñas literarias, combinando MySQL y MongoDB como motores de base de datos.
+API RESTful desarrollada con **Laravel**, que permite la gestión de una biblioteca virtual. Soporta operaciones CRUD sobre libros, autores,listas de deseos y reseñas literarias.
 
 ## Funcionalidades Principales
 
-- Autenticación con Laravel Sanctum (tokens).
+- Autenticación basada em tokens con Laravel Sanctum.
 - CRUD de libros y autores (solo admins).
-- Reseñas de libros gestionadas por usuarios.
+- Gestión de reseñas literarias (usuarios y admins).
+- Módulo de libros destacados.
+- Wishlist personal por usuario.
 - Control de acceso por roles (admin/user).
-- MongoDB para almacenamiento de reseñas (NoSQL).
 
-## Requisitos Previos
+## Tecnologías usadas
 
 - PHP 8.x  
 - Composer  
-- MySQL  
-- MongoDB  
-- PECL MongoDB Driver  
-- Laravel  
+- MySQL   
+- Laravel 
+- Sanctum 
+
+## Test
+
+Se incluyen tests funcionales (Feature) desarrollados con PHPUnit, ubicados en tests/Feature.
+- Ejecutar los tests con:
+
+php artisan test
 
 ##  Instalación Rápida
 
 1. Cloná el repositorio 
+
+   ```bash
+   git clone https://github.com/mariKaren/bwcProyectoFinal.git
+   cd Backend
    
 2. Instalá las dependencias:
 composer install
@@ -32,21 +43,13 @@ DB_CONNECTION=mysql
 DB_DATABASE=library  
 DB_USERNAME=root
 
-DB_CONNECTION_MONGO=mongodb
-DB_MONGO_DATABASE=libreriaVirtual
-DB_MONGO_URI=mongodb://localhost:27017 o link URI de MongoDB Atlas
+4. Generá la clave de la app:
 
-4. Instalá Sanctum:
-composer require laravel/sanctum
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan key:generate
 
-5. Importá los archivos dump de MySQL y MongoDB provistos.
+5. Importá el archivo dump de MySQL provisto.
 
 6. Iniciá el servidor:
+
 php artisan serve
 
-## Documentación y Endpoints
-Para la documentación completa de la API, base de datos y estructura de roles, consultá el archivo Memoria del Proyecto.
-
-🛡️ Proyecto desarrollado con fines educativos.
-© 2025 Virtual Library API

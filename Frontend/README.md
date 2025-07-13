@@ -1,69 +1,68 @@
-# React + TypeScript + Vite
+# 📚 Book Worms Club — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los usuarios pueden explorar un catálogo de libros, dejar reseñas, gestionar su lista de deseos y más. Está desarrollado con React, TypeScript y Tailwind CSS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades principales
 
-## Expanding the ESLint configuration
+- Ver el listado de libros disponibles.
+- Ver los detalles de un libro.
+- Autenticación de usuarios.
+- Ver y dejar reseñas (solo si estás autenticado).
+- Eliminar tu propia reseña y, en caso de ser admin, poder eliminar la de cualquier usuario.
+- Agregar/quitar libros a tu lista de deseos.
+- Página de destacados y sobre nosotros.
+- Acceso administrativo (solo usuarios con rol admin):
+  - Crear, editar y eliminar libros.
+  - Crear autores.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Tecnologías usadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **React** (con Vite)
+- **TypeScript**
+- **Tailwind CSS**
+- **React Router DOM**
+- **Toastify** (para notificaciones)
+- **Vitest** (para testing)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Pasos para instalar
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clonar el repositorio:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```bash
+   git clone https://github.com/mariKaren/bwcProyectoFinal.git
+   cd Frontend
+
+2. Instalar las dependencias:
+
+npm install
+
+3. Ejecutar el proyecto en modo desarrollo:
+
+npm run dev
+
+## Test
+Este proyecto usa Vitest para pruebas.
+
+- Ejecutar los tests con:
+
+npm run test
+
+## Estrctura del proyecto
+
+📦 src
+├──assets           #Imagenes
+├── components      # Componentes reutilizables
+      └──__tests__    # Tests realizados con Vitests
+├── pages           # Vistas principales (Home, Wishlist, Admin)
+├── hooks           # Custom hooks como useBookDetail
+├── services        # Configuración de llamadas a la API
+├── context         # Contexto de autenticación
+├── layout          # Layout principal
+├── types           # Tipado de entidades (Book, Review, etc.)
+└── routes          # App router y protección de rutas admin
