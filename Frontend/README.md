@@ -46,12 +46,16 @@ Este proyecto es el frontend de **Book Worms Club**, una plataforma donde los us
 
   npm run dev
 
+--- 
+
 ## Test
 Este proyecto usa Vitest para pruebas.
 
 - Ejecutar los tests con:
 
   npm run test
+
+--- 
 
 ## Estrctura del proyecto
 ```text
