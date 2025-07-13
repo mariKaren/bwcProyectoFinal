@@ -29,7 +29,8 @@ BookWormsClub/
 ├── Backend/ # API (Laravel)
 │     ├── app/
 │     └── README.md
-├── README.md # Este archivo (general) ```
+├── README.md # Este archivo (general)
+```
 
 ---
 
