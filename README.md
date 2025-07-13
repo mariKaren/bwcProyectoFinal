@@ -77,3 +77,23 @@ Las imágenes (como portadas de libros) se almacenan en `storage/app/public`, pe
 php artisan storage:link
 ```
 Este paso es obligatorio para que las imágenes se vean correctamente en el navegador.
+
+---
+## Usuarios y Roles
+
+En esta aplicación existen dos tipos de roles:
+
+- **Admin**: tiene acceso completo al sistema (crear, editar y eliminar libros, autores, etc.).
+- **User**: rol asignado automáticamente al registrarse mediante la aplicación.
+
+> Solo los usuarios con rol `user` pueden registrarse a través del formulario de registro.
+
+### Usuario administrador precreado
+
+Para fines de prueba, el proyecto ya incluye un usuario administrador:
+
+- **Email**: `karen@example.com`
+- **Contraseña**: `1234`
+
+> Se recomienda cambiar estas credenciales en producción.
+
