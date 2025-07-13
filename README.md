@@ -21,7 +21,7 @@
 ---
 
 ## Estructura del Proyecto
-``text
+```text
 BookWormsClub/
 ├── Frontend/ # Cliente (React + TS)
 │     ├── src/
@@ -30,7 +30,7 @@ BookWormsClub/
 │     ├── app/
 │     └── README.md
 ├── README.md # Este archivo (general)
-
+/```
 ---
 
 ## Tecnologías Utilizadas
