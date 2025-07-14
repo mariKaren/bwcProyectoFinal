@@ -79,14 +79,15 @@ export const AuthProvider = ({ children }: Props) => {
         try {
             if (token) {
                 await api.post("/logout");
+                toast.success("Logout realizado correctamente")
             }
         } catch (error) {
             console.error("Error al cerrar sesión en el servidor:", error);
+            toast.error("Error al cerrar sesión en el servidor");
         } finally {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
             setUser(null);
-            toast.success("Logout realizado correctamente")
         }
     };
 
