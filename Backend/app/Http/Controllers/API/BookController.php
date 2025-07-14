@@ -143,15 +143,29 @@ class BookController extends Controller
 
     public function destroy($id)
     {
-        $book = Book::find($id);
-        if (!$book) {
+        try {
+            $book = Book::find($id);
+            if (!$book) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Libro no encontrado',
+                ], 404);
+            }
+
+            $book->delete();
+            return response()->json([], 204);
+        } catch (\Exception $e) {
+            if ($e->getMessage() === 'No se puede eliminar un libro que está destacado.') {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+
             return response()->json([
                 'status' => 'error',
-                'message' => 'Book not found',
-            ], 404);
+                'message' => 'Ocurrió un error al eliminar el libro.',
+            ], 500);
         }
-
-        $book->delete();
-        return response()->json([], 204);
     }
 }

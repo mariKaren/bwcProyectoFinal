@@ -161,8 +161,9 @@ export const useBookDetail = () => {
             await api.delete(`/books/${book?.id}`);
             toast.success("¡Libro eliminado correctamente!")
             setTimeout(() => navigate(`/libros/busqueda`), 1000);
-        } catch {
-            toast.error("Error al eliminar el libro.Inténtelo de nuevo")
+        } catch(error:any) {
+            const errorMessage = error.response?.data?.message || "Error al eliminar el libro. Inténtelo de nuevo";
+            toast.error(errorMessage);
         }
     };
 
