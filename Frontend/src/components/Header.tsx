@@ -24,7 +24,7 @@ export default function Header() {
 
                 {/* Logo */}
                 <Link to="/" aria-label="Ir a la página de inicio">
-                    <img src="/src/assets/Book.png" alt="Logo de la libreria" className="h-15 lg:h-20 w-auto" />
+                    <img src="/src/assets/logo.png" alt="Logo de la libreria" className="h-15 lg:h-20 w-auto" />
                 </Link>
 
                 {/* Botón hamburguesa (solo mobile) */}
