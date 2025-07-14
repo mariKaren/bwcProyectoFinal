@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import 'tailwindcss';
 
 :root {
@@ -14,12 +15,19 @@
   --c-gray-text: #6B7280;
 }
 
+
 *{
   box-sizing: border-box;
 }
 
 #root {
   margin: 0 auto;
+}
+
+.font-text {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 @layer utilities {
@@ -83,6 +91,9 @@
 
   .hover\:text-red:hover {
     color: var(--c-red);
+  }
+  .font-title{
+    font-size: 3.3rem;
   }
 
   @media (min-width: 450px) and (max-width: 640px) {

@@ -2,7 +2,7 @@ export default function About() {
     return (
         <section className="min-h-[80vh] sm:mx-4 flex items-center justify-center">
         <div className="bg-beige max-w-4xl text-brown py-12 px-6 sm:px-12 md:px-20 rounded-2xl shadow-md space-y-6">
-            <h2 className=" text-2xl sm:text-3xl font-bold text-red text-center">Sobre nosotros</h2>
+            <h2 className=" text-2xl sm:text-3xl font-bold text-red text-center font-text">Sobre nosotros</h2>
 
             <p className="text-lg text-gray leading-relaxed">
             En <strong className="text-brown">Book Worms Club</strong>, somos un equipo apasionado por los libros y la lectura.

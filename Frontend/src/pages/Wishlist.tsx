@@ -63,7 +63,7 @@ export default function Wishlist() {
 
     return (
         <div className="p-4 pt-0">
-            <h1 className="text-2xl sm:text-3xl text-center text-red font-bold mb-8">Mi Wishlist</h1>
+            <h1 className="text-2xl sm:text-3xl text-center text-red font-bold mb-8 font-text">Mi Wishlist</h1>
             <BookGrid books={books} isLoading={isLoading} />
         </div>
     );

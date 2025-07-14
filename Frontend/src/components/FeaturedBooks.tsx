@@ -25,7 +25,7 @@ export default function FeaturedBooks() {
 
     return (
         <>
-            <h2 className="text-2xl md:text-3xl text-center text-red font-bold mb-10 drop-shadow-sm">Libros Destacados</h2>
+            <h2 className="text-2xl md:text-3xl text-center text-red font-bold mb-10 drop-shadow-sm font-text">Libros Destacados</h2>
             <BookGrid books={featuredBooks} isLoading={isLoading} />
             <div className="text-right"> 
                     <NavLink
