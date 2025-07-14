@@ -116,6 +116,7 @@ export const useBookDetail = () => {
         }
     };
 
+    //Funcion para eliminar de la lista de deseos
     const handleRemoveFromWishlist = async () => {
         try {
             await api.delete(`/wishlist/${id}`);
@@ -126,6 +127,7 @@ export const useBookDetail = () => {
         }
     };
 
+    //Funcion para enviar una reseña
     const handleSubmitReview = async () => {
         const newErrors: { [key: string]: string } = {};
         if (!reviewDescription.trim()) {
@@ -156,6 +158,7 @@ export const useBookDetail = () => {
         }
     };
 
+    //Funcion para eliminar un libro
     const handleDeleteBook = async () => {
         try {
             await api.delete(`/books/${book?.id}`);
