@@ -61,7 +61,7 @@ export default function BookForm({
 
         <div>
           <label htmlFor="author" className="block font-medium mb-2">Autor</label>
-          <div className="flex gap-2 items-center">
+          <div className="flex flex-wrap md:flex-nowrap gap-2 items-center">
             <select
               id="author"
               name="author_id"

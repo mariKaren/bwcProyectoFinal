@@ -3,6 +3,7 @@ import { AuthContext } from "./AuthContext";
 import api from "../services/api"; // Es la instancia configurada con axios
 import type { ReactNode } from "react";
 import type { User } from "../types/user";
+import { toast } from 'react-toastify';
 
 interface Props {
     children: ReactNode;
@@ -85,7 +86,7 @@ export const AuthProvider = ({ children }: Props) => {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
             setUser(null);
-            console.log("Logout local completado");
+            toast.success("Logout realizado correctamente")
         }
     };
 
