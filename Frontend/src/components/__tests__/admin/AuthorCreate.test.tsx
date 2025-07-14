@@ -35,6 +35,10 @@ describe("AuthorCreate", () => {
       target: { value: "Gabriel García Márquez" },
     });
 
+    fireEvent.change(screen.getByLabelText(/Fecha de nacimiento/i), {
+      target: { value: "1927-03-06" }, // fecha válida en el pasado
+    });
+
     // Simula el clic en el botón
     fireEvent.click(screen.getByRole("button", { name: /crear autor/i }));
 
