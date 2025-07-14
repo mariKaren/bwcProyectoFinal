@@ -57,7 +57,9 @@ Se incluyen tests funcionales (Feature) desarrollados con PHPUnit, ubicados en t
 
 5. Importá el archivo dump de MySQL provisto.
 
-6. Iniciá el servidor:
+6. Inicia Apache y MySQL en el panel de XAMPP
+
+7. Iniciá el servidor:
 
     php artisan serve
 
