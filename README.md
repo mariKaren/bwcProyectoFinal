@@ -95,5 +95,4 @@ Para fines de prueba, el proyecto ya incluye un usuario administrador:
 - **Email**: `karen@example.com`
 - **Contraseña**: `1234`
 
-> Se recomienda cambiar estas credenciales en producción.
 
