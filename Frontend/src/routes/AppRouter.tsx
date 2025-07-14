@@ -15,6 +15,7 @@ import BookCreate from "../pages/admin/BookCreate.tsx";
 import AuthorCreate from "../pages/admin/AuthorCreate.tsx";
 import AuthorView from "../pages/admin/AuthorView.tsx";
 import AuthorEdit from "../pages/admin/AuthorEdit.tsx";
+import NotFound from "../pages/NotFound.tsx";
 
 export default function AppRouter() {
     return (
@@ -39,7 +40,8 @@ export default function AppRouter() {
 
             {/* Login y registro fuera del layout */}
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/registro" element={<Register />} /> */}
+
+            <Route path="*" element={<NotFound />} />
         </Routes>
         
     );
