@@ -13,6 +13,8 @@ import BookEdit from "../pages/admin/BookEdit.tsx";
 import AdminPanel from "../pages/admin/AdminPanel.tsx";
 import BookCreate from "../pages/admin/BookCreate.tsx";
 import AuthorCreate from "../pages/admin/AuthorCreate.tsx";
+import AuthorView from "../pages/admin/AuthorView.tsx";
+import AuthorEdit from "../pages/admin/AuthorEdit.tsx";
 
 export default function AppRouter() {
     return (
@@ -30,6 +32,8 @@ export default function AppRouter() {
                     <Route path="libros/:id/editar" element={<BookEdit />} />
                     <Route path="libros/crear" element={<BookCreate />} />
                     <Route path="autores/crear" element={<AuthorCreate />} />
+                    <Route path="autores" element={<AuthorView />} />
+                    <Route path="autores/editar/:id" element={<AuthorEdit />} />
                 </Route>
             </Route>
 

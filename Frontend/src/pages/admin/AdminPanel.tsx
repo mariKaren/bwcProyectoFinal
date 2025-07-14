@@ -14,6 +14,9 @@ export default function AdminPanel() {
                 <Link to="/admin/autores/crear" className="bg-green px-4 py-2 rounded hover:bg-green">
                 Crear Autor
                 </Link>
+                <Link to="/admin/autores" className="bg-orange px-4 py-2 rounded hover:bg-orange-dark">
+                Editar o Eliminar Autores
+                </Link>
             </div>
         </div>
     );
