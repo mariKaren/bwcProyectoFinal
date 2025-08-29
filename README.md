@@ -95,14 +95,30 @@ Para fines de prueba, el proyecto ya incluye un usuario administrador:
 - **Email**: `karen@example.com`
 - **Contraseña**: `1234`
 
-![Captura de pantalla](https://github.com/user-attachments/assets/1ae122e5-22ae-4164-9977-76e30aaf38e7)
-![Captura de pantalla](https://github.com/user-attachments/assets/fc12010c-414a-40cc-87ce-efb8cd4a2c48)
-![Captura de pantalla 2025-08-28 122149](https://github.com/user-attachments/assets/db9ee44a-b786-4d25-bf01-bba2e9c4e6a1)
-![Captura de pantalla 2025-08-28 122204](https://github.com/user-attachments/assets/6ba8eb1e-77a6-4a48-874d-ccd260337ebf)
-![Captura de pantalla 2025-08-28 122248](https://github.com/user-attachments/assets/16137187-8c5e-4c0a-99e0-06fe9f42f47e)
-![Captura de pantalla 2025-08-28 122322](https://github.com/user-attachments/assets/af31dd2d-fa45-4e8a-9e95-09af94377b83)
-![Captura de pantalla 2025-08-28 122649](https://github.com/user-attachments/assets/ee49d0b2-35cb-498a-868d-46a99efc7417)
-![Captura de pantalla 2025-08-28 122705](https://github.com/user-attachments/assets/04a3e6b7-4e2d-454b-9295-3c44e2cf5f1e)
+---
+
+## 📸 Capturas de Pantalla
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1ae122e5-22ae-4164-9977-76e30aaf38e7" width="49%"/>
+  <img src="https://github.com/user-attachments/assets/fc12010c-414a-40cc-87ce-efb8cd4a2c48" width="49%"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/db9ee44a-b786-4d25-bf01-bba2e9c4e6a1" width="49%"/>
+  <img src="https://github.com/user-attachments/assets/6ba8eb1e-77a6-4a48-874d-ccd260337ebf" width="49%"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/16137187-8c5e-4c0a-99e0-06fe9f42f47e" width="49%"/>
+  <img src="https://github.com/user-attachments/assets/af31dd2d-fa45-4e8a-9e95-09af94377b83" width="49%"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ee49d0b2-35cb-498a-868d-46a99efc7417" width="49%"/>
+  <img src="https://github.com/user-attachments/assets/04a3e6b7-4e2d-454b-9295-3c44e2cf5f1e" width="49%"/>
+</p>
+
 
 
 
